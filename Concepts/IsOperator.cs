@@ -1,12 +1,31 @@
-﻿namespace Concepts
+﻿using System.Collections;
+
+namespace Concepts
 {
     internal class IsOperator
     {
-        public IsOperator()
+
+        public bool NullCheck()
+        {
+            var i = "hello";
+            return i is null;
+        }
+        public bool NotNullCheck()
+        {
+            var i = "world";
+            return i is not null;
+        }
+
+        public bool CheckObjectType()
+        {
+            var i = new ArrayList() { 1, "hi", true, new { x = "X" } };
+            return i is ArrayList;
+        }
+
+        public bool CheckValue()
         {
             var i = 5;
-            bool check = i is int;
-
+            return i is 5;
         }
     }
 }
