@@ -1,6 +1,6 @@
 ﻿namespace Concepts._01OOPSConcepts
 {
-    internal class Polymorphism: BaseClass 
+    internal class Polymorphism : BaseClass
     {
         #region Overloading (Compile-Time Polymorphism)
         public int Overloading(int i)
@@ -31,7 +31,7 @@
     }
 
     internal class BaseClass
-    { 
+    {
         /// <summary>
         /// note the virtual keyword
         /// </summary>

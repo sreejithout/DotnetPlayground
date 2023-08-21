@@ -8,7 +8,7 @@
         public int PublicProperty { get; set; }
         public void PublicAccessMethod()
         {
-            
+
         }
     }
 }

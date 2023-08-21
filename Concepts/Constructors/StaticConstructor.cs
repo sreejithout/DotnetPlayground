@@ -10,7 +10,7 @@
             Console.WriteLine("Static Constructor");
         }
 
-        public static void StaticMethod() 
+        public static void StaticMethod()
         {
             Console.WriteLine("Static Method");
         }

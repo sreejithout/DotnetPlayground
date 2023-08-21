@@ -3,10 +3,11 @@
     internal class Tuples
     {
 
-        string callingTuples() {
+        string callingTuples()
+        {
             int invokeCondition = 1;
-            
-            switch(invokeCondition)
+
+            switch (invokeCondition)
             {
                 case 1:
                     var t1 = One(1, 5);

@@ -5,10 +5,12 @@
         public async void ExceptionFilter()
         {
             try { throw new NotImplementedException(); }
-            catch (Exception e) when (e.Message.Contains("hello")) {
+            catch (Exception e) when (e.Message.Contains("hello"))
+            {
                 await LogAsync(); // 1. await in catch
-            } 
-            finally {
+            }
+            finally
+            {
                 await CloseAsync(); // 1. await in finally
             }
         }

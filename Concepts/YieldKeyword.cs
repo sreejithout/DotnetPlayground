@@ -9,7 +9,8 @@
         /// <returns></returns>
         public static IEnumerable<int> GetNumbersList(int[] numberArray)
         {
-            foreach (var number in numberArray) { 
+            foreach (var number in numberArray)
+            {
                 yield return number;
             }
         }

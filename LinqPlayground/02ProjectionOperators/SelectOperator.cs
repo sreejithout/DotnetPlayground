@@ -20,14 +20,14 @@ namespace LinqPlayground._02ProjectionOperators
         public List<Employee> BasicQuery()
         {
             return (from emp in _employees
-                             select emp).ToList();
+                    select emp).ToList();
         }
 
         public List<Employee> BasicMethod()
         {
             return _employees.Where(emp => emp.Id == 2).ToList();
         }
-        
+
 
         public List<int> BasicQuerySelectingField()
         {
@@ -88,11 +88,11 @@ namespace LinqPlayground._02ProjectionOperators
         public void QueryMapDataToAnonymousType()
         {
             var query = (from emp in _employees
-                    select new
-                    {
-                        StudentId = emp.Id,
-                        StudentName = emp.Name
-                    }).ToList();
+                         select new
+                         {
+                             StudentId = emp.Id,
+                             StudentName = emp.Name
+                         }).ToList();
         }
 
         public void MethodMapDataToAnonymousType()

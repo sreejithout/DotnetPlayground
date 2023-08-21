@@ -7,7 +7,7 @@
         /// </summary>
         private PrivateConstructor()
         {
-            
+
         }
     }
 }
