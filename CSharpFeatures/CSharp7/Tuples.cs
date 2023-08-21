@@ -12,6 +12,8 @@
                     var t1 = One(1, 5);
                     return $"{t1.Item1} {t1.Item2}";
                     break;
+                default:
+                    return "none";
 
             }
 

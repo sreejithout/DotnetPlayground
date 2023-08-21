@@ -1,5 +1,4 @@
-﻿using DotnetPlayground.BLL.Models.ForLinqExamples;
-using System;
+﻿using LinqPlayground.Models;
 
 namespace LinqPlayground._02ProjectionOperators
 {

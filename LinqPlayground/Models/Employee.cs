@@ -1,4 +1,4 @@
-﻿namespace DotnetPlayground.BLL.Models.ForLinqExamples
+﻿namespace LinqPlayground.Models
 {
     public class Employee
     {
