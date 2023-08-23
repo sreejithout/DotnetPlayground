@@ -49,8 +49,11 @@ namespace DotnetPlayground.Controllers
 
         // DELETE api/<ProductController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
+            var newProd = _context.Products.Single(p => p.Id == id);
+            _context.Remove(newProd);
+            await _context.SaveChangesAsync();
         }
     }
 }
