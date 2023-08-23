@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EntityFrameworkCorePlayground.Migrations
 {
-    [DbContext(typeof(TextDbContext))]
+    [DbContext(typeof(DummyDbContext))]
     partial class TextDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

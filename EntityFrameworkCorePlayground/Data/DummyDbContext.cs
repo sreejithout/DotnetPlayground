@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EntityFrameworkCorePlayground.Data
 {
-    public class TextDbContext : DbContext
+    public class DummyDbContext : DbContext
     {
-        public TextDbContext(DbContextOptions<TextDbContext> options) : base(options)
+        public DummyDbContext(DbContextOptions<DummyDbContext> options) : base(options)
         {
 
         }

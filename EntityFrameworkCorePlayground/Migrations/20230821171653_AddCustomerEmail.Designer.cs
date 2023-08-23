@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EntityFrameworkCorePlayground.Migrations
 {
-    [DbContext(typeof(TextDbContext))]
+    [DbContext(typeof(DummyDbContext))]
     [Migration("20230821171653_AddCustomerEmail")]
     partial class AddCustomerEmail
     {

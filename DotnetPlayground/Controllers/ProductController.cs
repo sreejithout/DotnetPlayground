@@ -1,6 +1,6 @@
-﻿using EntityFrameworkCorePlayground.Data;
-using EntityFrameworkCorePlayground.Models;
+﻿using EntityFrameworkCorePlayground.Models;
 using Microsoft.AspNetCore.Mvc;
+using Repositories.Interfaces;
 
 namespace DotnetPlayground.Controllers
 {
@@ -8,52 +8,46 @@ namespace DotnetPlayground.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly TextDbContext _context;
+        private readonly IProductRepository _productRepository;
 
-        public ProductController(TextDbContext context)
+        public ProductController(IProductRepository productRepository)
         {
-            _context = context;
+            _productRepository = productRepository;
         }
 
         // GET: api/<ProductController>
         [HttpGet]
         public IEnumerable<Product> Get()
         {
-            return _context.Products;
+            return _productRepository.GetAllProducts();
         }
 
         // GET api/<ProductController>/5
         [HttpGet("{id}")]
         public async Task<Product> Get(int id)
         {
-            return await _context.Products.FindAsync(id);
+            return await _productRepository.GetProduct(id);
         }
 
         // POST api/<ProductController>
         [HttpPost]
         public async Task Post([FromBody] Product prod)
         {
-            _context.AddAsync(new Product { Name = prod.Name, Price = prod.Price });
-            await _context.SaveChangesAsync();
+            await _productRepository.AddProduct(prod);
         }
 
         // PUT api/<ProductController>/5
         [HttpPut]
         public async Task Put([FromBody] Product prod)
         {
-            var newProd = _context.Products.Single(p => p.Id == prod.Id);
-            newProd.Name = prod.Name;
-            newProd.Price = prod.Price;
-            await _context.SaveChangesAsync();
+            await _productRepository.UpdateProduct(prod);
         }
 
         // DELETE api/<ProductController>/5
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
-            var newProd = _context.Products.Single(p => p.Id == id);
-            _context.Remove(newProd);
-            await _context.SaveChangesAsync();
+            await _productRepository.RemoveProduct(id);
         }
     }
 }
