@@ -12,6 +12,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// We need to Add Http Client as additional service for using HttpClientFactory.
+builder.Services.AddHttpClient();
+
 // Reading Configurations
 builder.Configuration
     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true) // 1. from appSettings
@@ -29,6 +32,7 @@ builder.Services.AllDependencies();
 
 // 5. DI the configurations to other services
 builder.Services.Configure<AppOptions>(builder.Configuration.GetSection("appOptions"));
+builder.Services.Configure<PokemonApiOptions>(builder.Configuration.GetSection(PokemonApiOptions.PokemonApi));
 
 var app = builder.Build();
 
@@ -50,7 +54,6 @@ app.Use(async (context, next) =>
     var appOptions = builder.Configuration.GetSection("appOptions").Get<AppOptions>();
     Console.WriteLine($"inside .NET version: {appOptions.DotnetFeatures.Version}");
 
-    // 5. DI
     await next();
 });
 
