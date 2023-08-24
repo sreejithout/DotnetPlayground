@@ -1,19 +1,18 @@
-﻿namespace CSharpFeatures.CSharp6
+﻿namespace CSharpFeatures.CSharp6;
+
+internal class StringInterpolation
 {
-    internal class StringInterpolation
+    public int X { get; set; }
+    public int Y { get; set; }
+
+    public StringInterpolation(int x, int y)
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        X = x;
+        Y = y;
+    }
 
-        public StringInterpolation(int x, int y)
-        {
-            X = x;
-            Y = y;
-        }
-
-        public string Interpolated()
-        {
-            return $"{X} {Y}"; // 1. this is how we interpolate the strings
-        }
+    public string Interpolated()
+    {
+        return $"{X} {Y}"; // 1. this is how we interpolate the strings
     }
 }

@@ -1,7 +1,7 @@
-﻿namespace SharedPocos.Options
+﻿namespace SharedPocos.Options;
+
+public class CSharpFeatures
 {
-    public class CSharpFeatures
-    {
-        public int Version { get; set; }
-    }
+    public const string CSharp = "cSharpFeatures";
+    public int Version { get; set; }
 }

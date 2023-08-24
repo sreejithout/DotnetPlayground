@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetPlayground", "DotnetPlayground\DotnetPlayground.csproj", "{6CAF1FC7-C7E1-4A06-8261-395DB6CB6FEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetPlayground.WebApi", "DotnetPlayground\DotnetPlayground.WebApi.csproj", "{6CAF1FC7-C7E1-4A06-8261-395DB6CB6FEF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpFeatures", "CSharpFeatures\CSharpFeatures.csproj", "{C45A4AE8-BD1E-4F25-8165-D7366C73DEA3}"
 EndProject
@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositorie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{89A11B2F-02B4-40E8-A0F3-18729E131BF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedPocos", "SharedPocos\SharedPocos.csproj", "{6898E02D-551C-4FCA-9E46-8FB778A4FCEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedPocos", "SharedPocos\SharedPocos.csproj", "{6898E02D-551C-4FCA-9E46-8FB778A4FCEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

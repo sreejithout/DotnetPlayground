@@ -1,14 +1,13 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace CSharpFeatures.CSharp6
+namespace CSharpFeatures.CSharp6;
+
+internal class NullConditionalOperators
 {
-    internal class NullConditionalOperators
+    public static string FromJson(JObject json)
     {
-        public static string FromJson(JObject json)
-        {
-            if (json?["x"]?.Type == JTokenType.Integer) // 1. does null checks with "?."
-                return "x";
-            return "";
-        }
+        if (json?["x"]?.Type == JTokenType.Integer) // 1. does null checks with "?."
+            return "x";
+        return "";
     }
 }

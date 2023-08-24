@@ -1,7 +1,7 @@
-﻿namespace SharedPocos.Options
+﻿namespace SharedPocos.Options;
+
+public class DotnetFeatures
 {
-    public class DotnetFeatures
-    {
-        public int Version { get; set; }
-    }
+    public const string Dotnet = "dotnetFeatures";
+    public int Version { get; set; }
 }

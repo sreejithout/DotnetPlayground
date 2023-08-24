@@ -1,10 +1,9 @@
-﻿namespace CSharpFeatures.CSharp7
+﻿namespace CSharpFeatures.CSharp7;
+
+internal class BinaryLiterals
 {
-    internal class BinaryLiterals
+    public void BinaryLiteralExample()
     {
-        public void BinaryLiteralExample()
-        {
-            int[] numbers = { 0b1, 0b10, 0b10000 }; // binary literals
-        }
+        int[] numbers = { 0b1, 0b10, 0b10000 }; // binary literals
     }
 }

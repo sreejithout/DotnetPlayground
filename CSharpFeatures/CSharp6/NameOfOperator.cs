@@ -1,14 +1,13 @@
-﻿namespace CSharpFeatures.CSharp6
+﻿namespace CSharpFeatures.CSharp6;
+
+internal class NameOfOperator
 {
-    internal class NameOfOperator
+    public GetterOnlyAutoProperties GetProperty(GetterOnlyAutoProperties x)
     {
-        public GetterOnlyAutoProperties GetProperty(GetterOnlyAutoProperties x)
+        if (x == null)
         {
-            if (x == null)
-            {
-                throw new ArgumentNullException(nameof(x)); // 1. nameof
-            }
-            return x;
+            throw new ArgumentNullException(nameof(x)); // 1. nameof
         }
+        return x;
     }
 }

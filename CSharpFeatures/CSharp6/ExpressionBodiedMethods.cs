@@ -1,16 +1,15 @@
-﻿namespace CSharpFeatures.CSharp6
+﻿namespace CSharpFeatures.CSharp6;
+
+internal class ExpressionBodiedMethods
 {
-    internal class ExpressionBodiedMethods
+    public int X { get; set; }
+    public int Y { get; set; }
+
+    public ExpressionBodiedMethods(int x, int y)
     {
-        public int X { get; set; }
-        public int Y { get; set; }
-
-        public ExpressionBodiedMethods(int x, int y)
-        {
-            X = x;
-            Y = y;
-        }
-
-        public string ExpressionBodied() => $"{X} {Y}"; // 1. this is how we write expression bodied methods
+        X = x;
+        Y = y;
     }
+
+    public string ExpressionBodied() => $"{X} {Y}"; // 1. this is how we write expression bodied methods
 }
