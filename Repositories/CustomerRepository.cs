@@ -20,7 +20,11 @@ namespace Repositories
 
         public async Task<bool> AddCustomer(Customer customer)
         {
-            var newCustomer = new Customer { FirstName = customer.FirstName, LastName = customer.LastName };
+            var newCustomer = new Customer
+            {
+                FirstName = customer.FirstName,
+                LastName = customer.LastName
+            };
             await _dbContext.AddAsync(newCustomer);
             await _dbContext.SaveChangesAsync();
             return true;
@@ -46,9 +50,13 @@ namespace Repositories
             return true;
         }
 
-        public Task<Customer> UpdateCustomer(Customer customer)
+        public async Task<Customer> UpdateCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            var newCustomer = _dbContext.Customers.Single(p => p.Id == customer.Id);
+            newCustomer.FirstName = customer.FirstName;
+            newCustomer.LastName = customer.LastName;
+            await _dbContext.SaveChangesAsync();
+            return newCustomer;
         }
     }
 }
