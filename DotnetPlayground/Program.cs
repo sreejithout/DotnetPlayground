@@ -1,3 +1,4 @@
+using DotnetPlayground;
 using EntityFrameworkCorePlayground.Data;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
@@ -14,7 +15,8 @@ builder.Services.AddDbContext<DummyDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyDatabase"));
 });
-builder.Services.AddRepositories();
+
+builder.Services.AllDependencies();
 
 var app = builder.Build();
 
