@@ -11,19 +11,19 @@ namespace DotnetPlayground.WebApi.Controllers;
 public class ProductController : ControllerBase
 {
     private readonly IProductRepository _productRepository;
-    private readonly IOptions<AppOptions> _appOptions;
+    private readonly AppOptions _appOptions;
 
     public ProductController(IProductRepository productRepository, IOptions<AppOptions> appOptions)
     {
         _productRepository = productRepository;
-        _appOptions = appOptions;
+        _appOptions = appOptions.Value;
     }
 
     // GET: api/<ProductController>
     [HttpGet]
     public IEnumerable<Product> Get()
     {
-        Console.WriteLine($"DI configure value 'C# Version' inside ProductController: {_appOptions.Value.CSharpFeatures.Version}");
+        Console.WriteLine($"DI configure value 'C# Version' inside ProductController: {_appOptions.CSharpFeatures.Version}");
         return _productRepository.GetAllProducts();
     }
 

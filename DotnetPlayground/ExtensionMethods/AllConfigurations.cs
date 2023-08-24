@@ -6,9 +6,10 @@ public static class AllConfigurations
     public static void RegisterConfigurations(this IServiceCollection services, ConfigurationManager configuration)
     {
         services.Configure<AppOptions>(configuration.GetSection("appOptions"));
-        services.Configure<PokemonApiOptions>(configuration.GetSection(PokemonApiOptions.PokemonApi));
-
+        
+        // This is the better way to bind configurations to options with validations.
         services.AddOptions<PokemonApiOptions>()
-            .Bind(configuration.GetSection(PokemonApiOptions.PokemonApi));
+            .Bind(configuration.GetSection(PokemonApiOptions.PokemonApi))
+            .ValidateDataAnnotations();
     }
 }
