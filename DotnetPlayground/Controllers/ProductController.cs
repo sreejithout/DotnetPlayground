@@ -1,6 +1,8 @@
 ﻿using EntityFrameworkCorePlayground.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Repositories.Interfaces;
+using SharedPocos.Options;
 
 namespace DotnetPlayground.Controllers
 {
@@ -9,16 +11,19 @@ namespace DotnetPlayground.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
+        private readonly IOptions<AppOptions> _appOptions;
 
-        public ProductController(IProductRepository productRepository)
+        public ProductController(IProductRepository productRepository, IOptions<AppOptions> appOptions)
         {
             _productRepository = productRepository;
+            _appOptions = appOptions;
         }
 
         // GET: api/<ProductController>
         [HttpGet]
         public IEnumerable<Product> Get()
         {
+            Console.WriteLine($"DI configure value 'C# Version' inside ProductController: {_appOptions.Value.CSharpFeatures.Version}");
             return _productRepository.GetAllProducts();
         }
 

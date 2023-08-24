@@ -27,9 +27,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesignPatterns", "DesignPat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureBased", "AzureBased", "{6D567971-9935-4167-928D-FEB3A01CD727}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{F9BEE928-EE8A-4F39-A86B-FF75C36E5185}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{F9BEE928-EE8A-4F39-A86B-FF75C36E5185}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{89A11B2F-02B4-40E8-A0F3-18729E131BF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{89A11B2F-02B4-40E8-A0F3-18729E131BF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedPocos", "SharedPocos\SharedPocos.csproj", "{6898E02D-551C-4FCA-9E46-8FB778A4FCEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,6 +87,10 @@ Global
 		{89A11B2F-02B4-40E8-A0F3-18729E131BF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89A11B2F-02B4-40E8-A0F3-18729E131BF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89A11B2F-02B4-40E8-A0F3-18729E131BF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6898E02D-551C-4FCA-9E46-8FB778A4FCEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6898E02D-551C-4FCA-9E46-8FB778A4FCEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6898E02D-551C-4FCA-9E46-8FB778A4FCEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6898E02D-551C-4FCA-9E46-8FB778A4FCEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
