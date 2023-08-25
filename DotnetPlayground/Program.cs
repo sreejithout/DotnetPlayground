@@ -1,8 +1,6 @@
 using DotnetPlayground.WebApi.ExtensionMethods;
 using EntityFrameworkCorePlayground.Data;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using SharedPocos.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,14 +10,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// We need to Add Http Client as additional service for using HttpClientFactory.
-// Add all HttpClients in an Extension method.
-builder.Services.RegisterHttpClients(builder.Configuration);
-
 // Reading Configurations From Environment variables
 builder.Configuration.AddEnvironmentVariables(); // To Enable Reading From Environment variables
 
 Console.WriteLine($"outside: {builder.Configuration.GetValue<string>("hi")}");
+
+#region Service Registrations
+// We need to Add Http Client as additional service for using HttpClientFactory.
+builder.Services.RegisterHttpClients(builder.Configuration);
 
 // For Entity Framework Core to work
 builder.Services.AddDbContext<DummyDbContext>(options =>
@@ -35,6 +33,7 @@ builder.Services.RegisterConfigurations(builder.Configuration);
 
 // Register all custom routing constraints
 builder.Services.RegisterRoutingConstraints();
+#endregion
 
 var app = builder.Build();
 
@@ -59,7 +58,6 @@ app.UseAuthorization();
 
 // Register Route Endpoints
 app.RegisterEndpoints();
-
 # endregion
 
 app.Run();
