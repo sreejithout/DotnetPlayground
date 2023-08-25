@@ -1,5 +1,6 @@
 using DotnetPlayground.WebApi.ExtensionMethods;
 using EntityFrameworkCorePlayground.Data;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using SharedPocos.Options;
 
@@ -32,28 +33,13 @@ builder.Services.RegisterDependencies();
 // 5. DI the configurations to other services
 builder.Services.RegisterConfigurations(builder.Configuration);
 
+// Register all custom routing constraints
+builder.Services.RegisterRoutingConstraints();
+
 var app = builder.Build();
 
-// CONFIGURATIONS: Creating a simple custom middleware to read from configurations
-app.Use(async (context, next) =>
-{
-    // 1. take directly from configuration
-    Console.WriteLine($"inside: {builder.Configuration.GetValue<string>("hi")}");
-
-    // 2. take directly from configuration, from a key inside a section
-    Console.WriteLine($"inside angular version: {builder.Configuration.GetValue<string>("appOptions:angularFeatures:version")}");
-
-    // 3. Bind to a model
-    var appOptions1 = new AppOptions();
-    builder.Configuration.GetSection("appOptions").Bind(appOptions1);
-    Console.WriteLine($"inside .NET version: {appOptions1.CSharpFeatures.Version}");
-
-    // 4. Bind to model: different approach
-    var appOptions = builder.Configuration.GetSection("appOptions").Get<AppOptions>();
-    Console.WriteLine($"inside .NET version: {appOptions.DotnetFeatures.Version}");
-
-    await next();
-});
+// Register Simple Configuration uses
+app.RegisterSimpleConfigs(builder);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -64,8 +50,16 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.MapControllers();
+
+# region Routing
+app.UseRouting();
+
 app.UseAuthorization();
 
-app.MapControllers();
+// Register Route Endpoints
+app.RegisterEndpoints();
+
+# endregion
 
 app.Run();

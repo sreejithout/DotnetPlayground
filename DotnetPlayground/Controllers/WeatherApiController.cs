@@ -4,6 +4,8 @@ using SharedPocos.Options;
 
 namespace DotnetPlayground.WebApi.Controllers;
 
+[ApiController]
+[Route("api/v1/[controller]")]
 public class WeatherApiController : ControllerBase
 {
     private readonly WeatherApiOptions _weatherApiOptions;
