@@ -4,16 +4,15 @@ using SharedPocos.Options;
 
 namespace DotnetPlayground.WebApi.Controllers;
 
-
 [Route("api/v1/[controller]/[action]")]
 [ApiController]
-public class ExternalApiController : ControllerBase
+public class PokemonApiController : ControllerBase
 {
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly IConfiguration _config;
     private readonly PokemonApiOptions _pokemonApiOptions;
 
-    public ExternalApiController(IHttpClientFactory httpClientFactory, IConfiguration config, IOptions<PokemonApiOptions> pokemonApiOptions)
+    public PokemonApiController(IHttpClientFactory httpClientFactory, IConfiguration config, IOptions<PokemonApiOptions> pokemonApiOptions)
     {
         _httpClientFactory = httpClientFactory;
         _config = config;

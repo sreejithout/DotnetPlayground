@@ -12,11 +12,17 @@ public class ProductController : ControllerBase
 {
     private readonly IProductRepository _productRepository;
     private readonly AppOptions _appOptions;
+    private readonly AngularFeatureOptions _angularFeatureOptions;
 
-    public ProductController(IProductRepository productRepository, IOptions<AppOptions> appOptions)
+    public ProductController(
+        IProductRepository productRepository,
+        IOptions<AppOptions> appOptions, // NOTE: We are using IOptions. This will get the changed configuration value after restarting the app only.
+        IOptionsSnapshot<AngularFeatureOptions> angularFeatureOptions // NOTE: We are using IOptionsSnapshot to get the changed configuration value without restarting the app
+        )
     {
         _productRepository = productRepository;
         _appOptions = appOptions.Value;
+        _angularFeatureOptions = angularFeatureOptions.Value;
     }
 
     // GET: api/<ProductController>
@@ -24,6 +30,7 @@ public class ProductController : ControllerBase
     public IEnumerable<Product> Get()
     {
         Console.WriteLine($"DI configure value 'C# Version' inside ProductController: {_appOptions.CSharpFeatures.Version}");
+        Console.WriteLine($"DI configure value 'Angular Version' inside ProductController: {_angularFeatureOptions.Version}");
         return _productRepository.GetAllProducts();
     }
 

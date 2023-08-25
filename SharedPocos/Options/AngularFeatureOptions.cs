@@ -2,6 +2,6 @@
 
 public class AngularFeatureOptions
 {
-    public const string AngularFeatures = "angularFeatures";
+    public const string AngularFeatures = "appOptions:angularFeatures";
     public int Version { get; set; }
 }

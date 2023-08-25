@@ -13,7 +13,7 @@ builder.Services.AddSwaggerGen();
 
 // We need to Add Http Client as additional service for using HttpClientFactory.
 // Add all HttpClients in an Extension method.
-builder.Services.RegisterHttpClients();
+builder.Services.RegisterHttpClients(builder.Configuration);
 
 // Reading Configurations From Environment variables
 builder.Configuration.AddEnvironmentVariables(); // To Enable Reading From Environment variables
