@@ -1,19 +1,24 @@
+using DotnetPlayground.WebApi;
 using DotnetPlayground.WebApi.ExtensionMethods;
 using EntityFrameworkCorePlayground.Data;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    var parameterTransformer = new SlugifyParameterTransformer();
+    var routeTokenTransformerConvention = new RouteTokenTransformerConvention(parameterTransformer);
+    options.Conventions.Add(routeTokenTransformerConvention);
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Reading Configurations From Environment variables
 builder.Configuration.AddEnvironmentVariables(); // To Enable Reading From Environment variables
-
-Console.WriteLine($"outside: {builder.Configuration.GetValue<string>("hi")}");
 
 #region Service Registrations
 // We need to Add Http Client as additional service for using HttpClientFactory.
@@ -28,7 +33,7 @@ builder.Services.AddDbContext<DummyDbContext>(options =>
 // Register all dependencies in an Extension method
 builder.Services.RegisterDependencies();
 
-// 5. DI the configurations to other services
+// DI the configurations to other services
 builder.Services.RegisterConfigurations(builder.Configuration);
 
 // Register all custom routing constraints
@@ -37,7 +42,7 @@ builder.Services.RegisterRoutingConstraints();
 
 var app = builder.Build();
 
-// Register Simple Configuration uses
+// Register Multiple Configuration uses by a simple middleware
 app.RegisterSimpleConfigs(builder);
 
 // Configure the HTTP request pipeline.
@@ -56,7 +61,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-// Register Route Endpoints
+// Register Route Endpoints by a simple middleware
 app.RegisterEndpoints();
 # endregion
 

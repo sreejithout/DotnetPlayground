@@ -6,7 +6,7 @@ using SharedPocos.Options;
 
 namespace DotnetPlayground.WebApi.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/v1/[controller]/[action]")]
 [ApiController]
 public class ProductController : ControllerBase
 {
@@ -26,7 +26,7 @@ public class ProductController : ControllerBase
     }
 
     // GET: api/<ProductController>
-    [HttpGet]
+    [HttpGet("GetProducts")]
     public IEnumerable<Product> Get()
     {
         Console.WriteLine($"DI configure value 'C# Version' inside ProductController: {_appOptions.CSharpFeatures.Version}");
@@ -35,28 +35,28 @@ public class ProductController : ControllerBase
     }
 
     // GET api/<ProductController>/5
-    [HttpGet("{id}")]
-    public async Task<Product> Get(int id)
+    [HttpGet("/[action]/{id}")]
+    public async Task<Product> GetProductDetails(int id)
     {
         return await _productRepository.GetProduct(id);
     }
 
     // POST api/<ProductController>
-    [HttpPost]
+    [HttpPost("/AddProduct")] // Leading slash("/") will make sure to discard the parent route
     public async Task Post([FromBody] Product prod)
     {
         await _productRepository.AddProduct(prod);
     }
 
     // PUT api/<ProductController>/5
-    [HttpPut]
-    public async Task Put([FromBody] Product prod)
+    [HttpPut("[action]")]
+    public async Task UpdateProduct([FromBody] Product prod)
     {
         await _productRepository.UpdateProduct(prod);
     }
 
     // DELETE api/<ProductController>/5
-    [HttpDelete("{id}")]
+    [HttpDelete("DeleteProduct/{id}")]
     public async Task Delete(int id)
     {
         await _productRepository.RemoveProduct(id);

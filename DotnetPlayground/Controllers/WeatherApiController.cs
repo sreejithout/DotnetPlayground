@@ -4,8 +4,8 @@ using SharedPocos.Options;
 
 namespace DotnetPlayground.WebApi.Controllers;
 
+[Route("api/v1/[controller]/[action]")]
 [ApiController]
-[Route("api/v1/[controller]")]
 public class WeatherApiController : ControllerBase
 {
     private readonly WeatherApiOptions _weatherApiOptions;
@@ -17,8 +17,8 @@ public class WeatherApiController : ControllerBase
         _httpClientFactory = httpClientFactory;
     }
 
-    [HttpGet("{city}")]
-    public async Task<string> Get([FromRoute] string city)
+    [HttpGet("GetCurrentWeatherDetails/{city}")]
+    public async Task<string> GetCurrentWeatherDetails([FromRoute] string city)
     {
         var client = _httpClientFactory.CreateClient("weatherApi");
         var url = $"{_weatherApiOptions.CurrentWeatherUrl}?q={city}&key={_weatherApiOptions.ApiKey}";
