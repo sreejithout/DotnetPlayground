@@ -12,7 +12,9 @@ builder.Services.AddControllers(options =>
     var parameterTransformer = new SlugifyParameterTransformer();
     var routeTokenTransformerConvention = new RouteTokenTransformerConvention(parameterTransformer);
     options.Conventions.Add(routeTokenTransformerConvention);
-});
+})
+.AddXmlSerializerFormatters(); // To enable Consuming of Xml in endpoints
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
