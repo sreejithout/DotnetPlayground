@@ -8,11 +8,11 @@ namespace DotnetPlayground.WebApi.ExampleModels
         public int Id { get; set; }
 
         [FromQuery]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [FromHeader(Name = "Accept-Language")]
-        public string Language { get; set; }
+        public string? Language { get; set; }
 
-        public int[] Marks { get; set; }
+        public int[]? Marks { get; set; }
     }
 }

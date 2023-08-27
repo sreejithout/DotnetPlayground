@@ -1,8 +1,7 @@
-﻿namespace SharedPocos.Models
+﻿namespace SharedPocos.Models;
+
+public class MyCustomData
 {
-    public class MyCustomData
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
+    public int Id { get; set; }
+    public string? Name { get; set; }
 }
