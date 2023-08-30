@@ -16,6 +16,8 @@ builder.Services.AddControllers(options =>
 
     options.Filters.Add(new SampleGlobalActionFilter());
     options.Filters.Add(new SampleResourceFilterAttribute("Global"));
+    options.Filters.AddService<SampleResultFilterAttribute>();
+    options.Filters.Add<SampleResultFilterAttribute>();
 })
 .AddXmlSerializerFormatters(); // To enable Consuming of Xml in endpoints
 

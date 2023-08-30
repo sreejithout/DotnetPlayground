@@ -28,4 +28,18 @@ public class FilterController : ControllerBase
     {
         return "Hello Async Filter";
     }
+
+    [HttpGet]
+    [ServiceFilter(typeof(SampleResultFilterAttribute))]
+    public string GetWithResultFilter()
+    {
+        return "Hello Async Filter";
+    }
+
+    [HttpGet]
+    [TypeFilter(typeof(SampleResultFilterAttribute), Arguments = new object[] { "GetWithResultTypeFilter Action" })]
+    public string GetWithResultTypeFilter()
+    {
+        return "Hello Async Filter";
+    }
 }
