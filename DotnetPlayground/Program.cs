@@ -15,6 +15,7 @@ builder.Services.AddControllers(options =>
     options.Conventions.Add(routeTokenTransformerConvention);
 
     options.Filters.Add(new SampleGlobalActionFilter());
+    options.Filters.Add(new SampleResourceFilterAttribute("Global"));
 })
 .AddXmlSerializerFormatters(); // To enable Consuming of Xml in endpoints
 

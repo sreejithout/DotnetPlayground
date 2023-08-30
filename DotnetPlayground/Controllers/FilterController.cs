@@ -23,6 +23,7 @@ public class FilterController : ControllerBase
 
     [HttpGet]
     [SampleAsyncActionFilter("GetWithAsyncFilter Action")]
+    [SampleResourceFilter("GetWithAsyncFilter Action")]
     public string GetWithAsyncFilter()
     {
         return "Hello Async Filter";
