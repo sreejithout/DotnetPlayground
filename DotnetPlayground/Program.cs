@@ -1,24 +1,11 @@
-using DotnetPlayground.WebApi;
 using DotnetPlayground.WebApi.ExtensionMethods;
-using DotnetPlayground.WebApi.Filters;
 using EntityFrameworkCorePlayground.Data;
-using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers(options =>
-{
-    var parameterTransformer = new SlugifyParameterTransformer();
-    var routeTokenTransformerConvention = new RouteTokenTransformerConvention(parameterTransformer);
-    options.Conventions.Add(routeTokenTransformerConvention);
-
-    options.Filters.Add(new SampleGlobalActionFilter());
-    options.Filters.Add(new SampleResourceFilterAttribute("Global"));
-    options.Filters.AddService<SampleResultFilterAttribute>();
-    options.Filters.Add<SampleResultFilterAttribute>();
-})
+builder.Services.AddControllers(options => options.RegisterControllerOptions())
 .AddXmlSerializerFormatters(); // To enable Consuming of Xml in endpoints
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
