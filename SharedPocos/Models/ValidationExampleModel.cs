@@ -5,7 +5,7 @@ namespace SharedPocos.Models;
 
 // Doc link: https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-6.0
 // Whole list can be found from this url https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations?view=net-6.0
-public class ValidationExampleModel : IValidatableObject
+public class ValidationExampleModel
 {
     [Required]
     public string? Name { get; set; }
