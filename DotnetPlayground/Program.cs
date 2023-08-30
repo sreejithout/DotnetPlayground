@@ -1,5 +1,6 @@
 using DotnetPlayground.WebApi;
 using DotnetPlayground.WebApi.ExtensionMethods;
+using DotnetPlayground.WebApi.Filters;
 using EntityFrameworkCorePlayground.Data;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,8 @@ builder.Services.AddControllers(options =>
     var parameterTransformer = new SlugifyParameterTransformer();
     var routeTokenTransformerConvention = new RouteTokenTransformerConvention(parameterTransformer);
     options.Conventions.Add(routeTokenTransformerConvention);
+
+    options.Filters.Add(new SampleGlobalActionFilter());
 })
 .AddXmlSerializerFormatters(); // To enable Consuming of Xml in endpoints
 
