@@ -54,6 +54,9 @@ app.MapControllers();
 # region Routing
 app.UseRouting();
 
+// Register all middlewares inside an extension method
+app.RegisterMiddlewares();
+
 app.UseAuthorization();
 
 // Register Route Endpoints by a simple middleware

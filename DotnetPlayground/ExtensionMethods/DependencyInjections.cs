@@ -1,4 +1,5 @@
 ﻿using DotnetPlayground.WebApi.Filters;
+using DotnetPlayground.WebApi.Middlewares;
 using Repositories;
 
 namespace DotnetPlayground.WebApi.ExtensionMethods;
@@ -9,5 +10,6 @@ public static class DependencyInjections
         services.AddRepositories();
 
         services.AddSingleton<SampleResultFilterAttribute>();
+        services.AddTransient<ExceptionHandlingMiddleware>();
     }
 }
