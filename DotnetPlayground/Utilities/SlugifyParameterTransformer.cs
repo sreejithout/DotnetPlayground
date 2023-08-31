@@ -2,6 +2,7 @@
 
 namespace DotnetPlayground.WebApi.Utilities;
 
+// For handling route convention
 public class SlugifyParameterTransformer : IOutboundParameterTransformer
 {
     public string? TransformOutbound(object? value)
