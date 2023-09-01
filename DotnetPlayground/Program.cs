@@ -3,6 +3,7 @@ using EntityFrameworkCorePlayground.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var config = builder.Configuration;
 
 // Add services to the container.
 builder.Services.AddControllers(options => options.RegisterControllerOptions())
@@ -13,23 +14,23 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Reading Configurations From Environment variables
-builder.Configuration.AddEnvironmentVariables(); // To Enable Reading From Environment variables
+config.AddEnvironmentVariables(); // To Enable Reading From Environment variables
 
 #region Service Registrations
 // We need to Add Http Client as additional service for using HttpClientFactory.
-builder.Services.RegisterHttpClients(builder.Configuration);
+builder.Services.RegisterHttpClients(config);
 
 // For Entity Framework Core to work
 builder.Services.AddDbContext<DummyDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MyDatabase"));
+    options.UseSqlServer(config.GetConnectionString("MyDatabase"));
 });
 
 // Register all dependencies in an Extension method
 builder.Services.RegisterDependencies();
 
 // DI the configurations to other services
-builder.Services.RegisterConfigurations(builder.Configuration);
+builder.Services.RegisterConfigurations(config);
 
 // Register all custom routing constraints
 builder.Services.RegisterRoutingConstraints();
