@@ -5,6 +5,7 @@ namespace DotnetPlayground.WebApi.Middlewares;
 
 public class ExceptionHandlingMiddleware : IMiddleware
 {
+    // Using a middleware instead of using a filter for faster processing.
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
         try

@@ -40,7 +40,7 @@ public class ValidationExampleModel
     public string? ReTypePassword { get; set; }
 
     [Required]
-    [CustomName("S")]
+    [CustomName("S")] // This is a Custom Validation Attribute
     public string? CustomName { get; set; }
 
 

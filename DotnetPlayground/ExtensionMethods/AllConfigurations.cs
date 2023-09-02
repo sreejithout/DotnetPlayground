@@ -5,8 +5,10 @@ public static class AllConfigurations
 {
     public static void RegisterConfigurations(this IServiceCollection services, ConfigurationManager configuration)
     {
+        // binding a parent node to the option model
         services.Configure<AppOptions>(configuration.GetSection("appOptions"));
 
+        // binding a child node to the option model
         services.Configure<AngularFeatureOptions>(configuration.GetSection(AngularFeatureOptions.AngularFeatures));
 
         // This is the better way to bind configurations to options with validations.

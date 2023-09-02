@@ -13,7 +13,7 @@ public static class AllHttpClients
         {
             var weatherApiOptions = configuration.GetSection(WeatherApiOptions.WeatherApi).Get<WeatherApiOptions>();
 
-            c.BaseAddress = new Uri(weatherApiOptions.ApiBaseUrl); // It somehow removing the "v1" part if I'm not giving a trailing slash("/")
+            c.BaseAddress = new Uri(weatherApiOptions.ApiBaseUrl); // It somehow removing the "v1" part if I'm not giving a trailing slash("/"). Check this key's value in appsettings.json
         });
     }
 }
