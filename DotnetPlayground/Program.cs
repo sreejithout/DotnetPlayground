@@ -5,6 +5,15 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
 
+// Register Authentication in an Extension method
+builder.Services.RegisterAuthentication(config);
+
+builder.Services.AddAuthorization(options =>
+{
+    // Register Authorization Options in an Extension method
+    options.RegisterAuthorizationOptions();
+});
+
 // Add services to the container.
 builder.Services.AddControllers(options => options.RegisterControllerOptions())
 .AddXmlSerializerFormatters(); // To enable Consuming of Xml in endpoints
@@ -49,6 +58,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// this order is important for these middlewares to work properly as expected.
+app.UseAuthentication();
+
 
 app.MapControllers();
 

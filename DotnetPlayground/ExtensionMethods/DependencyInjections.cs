@@ -1,5 +1,7 @@
 ﻿using DotnetPlayground.WebApi.Filters;
 using DotnetPlayground.WebApi.Middlewares;
+using DotnetPlayground.WebApi.Utilities;
+using DotnetPlayground.WebApi.Utilities.Interfaces;
 using Repositories;
 
 namespace DotnetPlayground.WebApi.ExtensionMethods;
@@ -11,5 +13,7 @@ public static class DependencyInjections
 
         services.AddSingleton<SampleResultFilterAttribute>();
         services.AddTransient<ExceptionHandlingMiddleware>();
+
+        services.AddTransient<IJWTGenerator, JWTGenerator>();
     }
 }

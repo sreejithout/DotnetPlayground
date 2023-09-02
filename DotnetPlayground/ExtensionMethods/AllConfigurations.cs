@@ -17,5 +17,10 @@ public static class AllConfigurations
         services.AddOptions<WeatherApiOptions>()
             .Bind(configuration.GetSection(WeatherApiOptions.WeatherApi))
             .ValidateDataAnnotations();
+
+        services.AddOptions<JwtSettingsOptions>()
+            .Bind(configuration.GetSection(JwtSettingsOptions.JwtSettings))
+            .ValidateDataAnnotations();
+
     }
 }
