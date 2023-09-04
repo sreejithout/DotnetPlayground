@@ -14,6 +14,8 @@ builder.Services.AddAuthorization(options =>
     options.RegisterAuthorizationOptions();
 });
 
+builder.Services.AddCors(options => options.RegisterCorsOptions(config));
+
 // Add services to the container.
 builder.Services.AddControllers(options => options.RegisterControllerOptions())
 .AddXmlSerializerFormatters(); // To enable Consuming of Xml in endpoints
@@ -67,6 +69,9 @@ app.MapControllers();
 
 # region Routing
 app.UseRouting();
+
+// Adds Cors support
+app.UseCors();
 
 // Register all middlewares inside an extension method
 app.RegisterMiddlewares();
