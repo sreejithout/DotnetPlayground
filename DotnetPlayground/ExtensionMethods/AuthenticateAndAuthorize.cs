@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using EntityFrameworkCorePlayground.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using SharedPocos.Models.Identity;
 using System.Text;
@@ -18,6 +20,7 @@ public static class AuthenticateAndAuthorize
         })
         .AddJwtBearer(options =>
         {
+            options.SaveToken = true;
             options.TokenValidationParameters = new TokenValidationParameters
             {
                 ValidIssuer = config["jwtSettings:issuer"],
@@ -29,6 +32,13 @@ public static class AuthenticateAndAuthorize
                 ValidateLifetime = true,
             };
         });
+
+        // Makes sure Identity can be used
+        services.AddIdentityCore<IdentityUser>(options =>
+        {
+            options.SignIn.RequireConfirmedEmail = false;
+        })
+        .AddEntityFrameworkStores<DummyDbContext>();
     }
 
     public static void RegisterAuthorizationOptions(this AuthorizationOptions options)

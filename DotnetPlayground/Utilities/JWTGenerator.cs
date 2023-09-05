@@ -1,4 +1,5 @@
 ﻿using DotnetPlayground.WebApi.Utilities.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using SharedPocos.Models;
@@ -17,6 +18,17 @@ public class JWTGenerator : IJWTGenerator
     {
         _jwtSettingsOptions = jwtSettingsOptions.Value;
     }
+
+    public string GenerateIdentityJwt(IdentityUser user)
+    {
+        var request = new TokenGenerationRequest()
+        {
+            UserId = user.Id,
+            Email = user.Email
+        };
+        return GenerateJwt(request);
+    }
+
     public string GenerateJwt(TokenGenerationRequest request)
     {
         var tokenDescriptor = GetSecurityTokenDescriptor(request);
@@ -42,12 +54,16 @@ public class JWTGenerator : IJWTGenerator
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new(JwtRegisteredClaimNames.Sub, request.Email),
             new(JwtRegisteredClaimNames.Email, request.Email),
-            new("userid", request.UserId.ToString()),
+            new(JwtRegisteredClaimNames.Iat, DateTime.Now.ToUniversalTime().ToString()),
+            new("userid", request.UserId),
         };
 
-        foreach (var customClaim in request.CustomClaims)
+        if (request.CustomClaims != null)
         {
-            claims.Add(new Claim(customClaim.Key, customClaim.Value));
+            foreach (var customClaim in request.CustomClaims)
+            {
+                claims.Add(new Claim(customClaim.Key, customClaim.Value));
+            }
         }
 
         return claims;
