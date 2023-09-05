@@ -49,6 +49,10 @@ builder.Services.RegisterRoutingConstraints();
 
 var app = builder.Build();
 
+app.RegisterInlineMiddlewares();
+// Register all middlewares inside an extension method
+app.RegisterMiddlewares();
+
 // Register Multiple Configuration uses by a simple middleware
 app.RegisterSimpleConfigs(builder);
 
@@ -64,7 +68,6 @@ app.UseHttpsRedirection();
 // this order is important for these middlewares to work properly as expected.
 app.UseAuthentication();
 
-
 app.MapControllers();
 
 # region Routing
@@ -72,9 +75,6 @@ app.UseRouting();
 
 // Adds Cors support
 app.UseCors();
-
-// Register all middlewares inside an extension method
-app.RegisterMiddlewares();
 
 app.UseAuthorization();
 

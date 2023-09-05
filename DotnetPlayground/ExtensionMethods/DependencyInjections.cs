@@ -15,5 +15,7 @@ public static class DependencyInjections
         services.AddTransient<ExceptionHandlingMiddleware>();
 
         services.AddTransient<IJWTGenerator, JWTGenerator>();
+        services.AddTransient<SampleFactoryMiddleware>();
+        services.AddTransient<SampleFactoryMiddlewareWithDI>();
     }
 }
