@@ -13,10 +13,19 @@ public static class AllCorsOptions
                 .WithMethods("GET", "POST", "DELETE");
         });
 
-        options.AddPolicy("sampleNamedPolicy", policy => {
+        options.AddPolicy("sampleNamedPolicy", policy =>
+        {
             policy
                .WithOrigins("https:localhost:2020")
                .WithHeaders("Authorization");
+        });
+
+        options.AddPolicy("openForAll", policy =>
+        {
+            policy
+               .AllowAnyOrigin()
+               .AllowAnyHeader()
+               .AllowAnyMethod();
         });
     }
 }
