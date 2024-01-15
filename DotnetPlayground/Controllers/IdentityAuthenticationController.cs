@@ -70,7 +70,7 @@ public class IdentityAuthenticationController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Login([FromBody] UserLoginRequestDto requestDto)
     {
-        if(!ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             return BadRequest(new AuthResult()
             {
@@ -83,7 +83,7 @@ public class IdentityAuthenticationController : ControllerBase
         }
 
         var existingUser = await _userManager.FindByEmailAsync(requestDto.Email);
-        if(existingUser is null)
+        if (existingUser is null)
         {
             return BadRequest(new AuthResult()
             {
@@ -96,9 +96,10 @@ public class IdentityAuthenticationController : ControllerBase
         }
 
         var isCorrect = await _userManager.CheckPasswordAsync(existingUser, requestDto.Password);
-        if(!isCorrect)
+        if (!isCorrect)
         {
-            return BadRequest(new AuthResult() {
+            return BadRequest(new AuthResult()
+            {
                 Errors = new List<string>()
                 {
                     "Invalid credential"

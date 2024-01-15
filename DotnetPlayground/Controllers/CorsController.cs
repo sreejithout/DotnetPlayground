@@ -6,7 +6,7 @@ namespace DotnetPlayground.WebApi.Controllers;
 [Route("api/v1/[controller]/[action]")]
 [ApiController]
 [EnableCors] // If we don't specify any name here, it will apply default policy.
-public class CorsController: ControllerBase
+public class CorsController : ControllerBase
 {
     [HttpGet]
     [EnableCors("sampleNamedPolicy")]

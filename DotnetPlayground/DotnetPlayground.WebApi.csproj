@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EntityFrameworkCorePlayground\EntityFrameworkCorePlayground.csproj" />
-    <ProjectReference Include="..\Repositories\Repositories.csproj" />
+    <ProjectReference Include="..\Services\Services.csproj" />
     <ProjectReference Include="..\SharedPocos\SharedPocos.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,6 @@
 ﻿using EntityFrameworkCorePlayground.Models;
 using Microsoft.AspNetCore.Mvc;
-using Repositories.Interfaces;
+using Services.Interfaces;
 
 namespace DotnetPlayground.WebApi.Controllers;
 
@@ -8,12 +8,12 @@ namespace DotnetPlayground.WebApi.Controllers;
 [ApiController]
 public class CustomerController : ControllerBase
 {
-    private readonly ICustomerRepository _customerRepository;
+    private readonly ICustomerService _customerService;
     private readonly ILogger<CustomerController> _logger;
 
-    public CustomerController(ICustomerRepository customerRepository, ILogger<CustomerController> logger)
+    public CustomerController(ICustomerService customerService, ILogger<CustomerController> logger)
     {
-        _customerRepository = customerRepository;
+        _customerService = customerService;
         _logger = logger;
     }
 
@@ -25,7 +25,7 @@ public class CustomerController : ControllerBase
     public IEnumerable<Customer> GetAllCustomers()
     {
         _logger.LogInformation("Getting all the customers");
-        return _customerRepository.GetAllCustomers();
+        return _customerService.GetAllCustomers();
     }
 
     /// <summary>
@@ -36,29 +36,29 @@ public class CustomerController : ControllerBase
     [HttpGet("{id}")]
     public async Task<Customer> GetCustomer(int id)
     {
-        return await _customerRepository.GetCustomer(id);
+        return await _customerService.GetCustomer(id);
     }
 
     /// <summary>
     /// Add a Customer
     /// </summary>
-    /// <param name="prod"></param>
+    /// <param name="customer"></param>
     /// <returns></returns>
     [HttpPost]
-    public async Task AddCustomer([FromBody] Customer prod)
+    public async Task AddCustomer([FromBody] Customer customer)
     {
-        await _customerRepository.AddCustomer(prod);
+        await _customerService.AddCustomer(customer);
     }
 
     /// <summary>
     /// Update Customer
     /// </summary>
-    /// <param name="prod"></param>
+    /// <param name="customer"></param>
     /// <returns></returns>
     [HttpPut]
-    public async Task UpdateCustomer([FromBody] Customer prod)
+    public async Task UpdateCustomer([FromBody] Customer customer)
     {
-        await _customerRepository.UpdateCustomer(prod);
+        await _customerService.UpdateCustomer(customer);
     }
 
     /// <summary>
@@ -69,6 +69,6 @@ public class CustomerController : ControllerBase
     [HttpDelete("{id}")]
     public async Task RemoveCustomer(int id)
     {
-        await _customerRepository.RemoveCustomer(id);
+        await _customerService.RemoveCustomer(id);
     }
 }

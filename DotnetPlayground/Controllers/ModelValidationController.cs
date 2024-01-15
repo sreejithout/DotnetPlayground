@@ -64,13 +64,25 @@ public class ModelValidationController : ControllerBase
         return $"id: {id}, isTest: {isTest}";
     }
 
-    [HttpGet] // This works if nullable is enabled for either project of class
+    /// <summary>
+    /// Here, Validation works if nullable is enabled for either project or class
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="isTest"></param>
+    /// <returns></returns>
+    [HttpGet]
     public ActionResult<string> GetNullableAutoValidation(string id, bool isTest)
     {
         return $"id: {id}, isTest: {isTest}";
     }
 
-    [HttpPost] // This works if nullable is enabled for either project of class
+    /// <summary>
+    /// Model Validation. 
+    /// All Validation attributes are in the model properties.
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
+    [HttpPost]
     public IEnumerable<string> GetModelValidation(ValidationExampleModel model)
     {
         foreach (var item in model.GetType().GetProperties())

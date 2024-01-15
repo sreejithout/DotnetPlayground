@@ -70,7 +70,6 @@ app.UseAuthentication();
 
 app.MapControllers();
 
-# region Routing
 app.UseRouting();
 
 // Adds Cors support
@@ -80,6 +79,5 @@ app.UseAuthorization();
 
 // Register Route Endpoints by a simple middleware
 app.RegisterEndpoints();
-# endregion
 
 app.Run();
