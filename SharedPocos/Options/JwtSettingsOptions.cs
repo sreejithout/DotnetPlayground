@@ -14,5 +14,5 @@ public class JwtSettingsOptions
 
     [Required]
     public string Key { get; set; }
-    public int ExpiryMinutes { get; set; }
+    public TimeSpan ExpiryTimeSpan { get; set; }
 }
