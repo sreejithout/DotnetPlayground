@@ -11,11 +11,25 @@ public interface ICustomerRepository
     IEnumerable<Customer> GetAllCustomers();
 
     /// <summary>
-    /// Get a Customer's Details
+    /// Get a Customer's Details using EF Core Eager Loading
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    Task<Customer> GetCustomer(int id);
+    Task<Customer> GetCustomerEager(int id);
+
+    /// <summary>
+    /// Get a Customer's Details using EF Core Lazy Loading
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    Task<Customer> GetCustomerLazy(int id);
+
+    /// <summary>
+    /// Get a Customer's Details using EF Core From Sql Interpolated
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    Task<Customer> GetCustomerFromSqlInterpolated(int id);
 
     /// <summary>
     /// Add a Customer

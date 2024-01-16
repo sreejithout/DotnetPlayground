@@ -23,10 +23,21 @@ public class CustomerService : ICustomerService
         return _customerRepository.GetAllCustomers();
     }
 
-    public async Task<Customer> GetCustomer(int id)
+    public async Task<Customer> GetCustomerEager(int id)
     {
-        return await _customerRepository.GetCustomer(id);
+        return await _customerRepository.GetCustomerEager(id);
     }
+
+    public async Task<Customer> GetCustomerLazy(int id)
+    {
+        return await _customerRepository.GetCustomerLazy(id);
+    }
+
+    public async Task<Customer> GetCustomerFromSqlInterpolated(int id)
+    {
+        return await _customerRepository.GetCustomerFromSqlInterpolated(id);
+    }
+
 
     public async Task<bool> RemoveCustomer(int id)
     {

@@ -15,7 +15,16 @@ public interface ICustomerService
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    Task<Customer> GetCustomer(int id);
+    Task<Customer> GetCustomerEager(int id);
+
+    /// <summary>
+    /// Get a Customer's Details by Lazy loading
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    Task<Customer> GetCustomerLazy(int id);
+
+    Task<Customer> GetCustomerFromSqlInterpolated(int id);
 
     /// <summary>
     /// Add a Customer

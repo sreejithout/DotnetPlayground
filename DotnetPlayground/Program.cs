@@ -32,9 +32,11 @@ config.AddEnvironmentVariables(); // To Enable Reading From Environment variable
 builder.Services.RegisterHttpClients(config);
 
 // For Entity Framework Core to work
-builder.Services.AddDbContext<DummyDbContext>(options =>
+builder.Services.AddDbContextPool<DummyDbContext>(options =>
 {
-    options.UseSqlServer(config.GetConnectionString("MyDatabase"));
+    options
+        .UseLazyLoadingProxies()
+        .UseSqlServer(config.GetConnectionString("MyDatabase"));
 });
 
 // Register all dependencies in an Extension method

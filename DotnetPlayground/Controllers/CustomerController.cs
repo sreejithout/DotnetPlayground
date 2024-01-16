@@ -36,7 +36,32 @@ public class CustomerController : ControllerBase
     [HttpGet("{id}")]
     public async Task<Customer> GetCustomer(int id)
     {
-        return await _customerService.GetCustomer(id);
+        var customer = await _customerService.GetCustomerEager(id);
+        return customer;
+    }
+
+    /// <summary>
+    /// Get single Customer details by Lazy Loading
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpGet("Lazy/{id}")]
+    public async Task<Customer> GetCustomerLazy(int id)
+    {
+        var customer = await _customerService.GetCustomerLazy(id);
+        return customer;
+    }
+
+    /// <summary>
+    /// Get single Customer details From Sql Interpolated
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpGet("SqlInterpolated/{id}")]
+    public async Task<Customer> GetCustomerFromSqlInterpolated(int id)
+    {
+        var customer = await _customerService.GetCustomerFromSqlInterpolated(id);
+        return customer;
     }
 
     /// <summary>

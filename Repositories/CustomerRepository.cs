@@ -36,7 +36,7 @@ internal class CustomerRepository : ICustomerRepository
     }
 
     /// <summary>
-    /// GetCustomer
+    /// GetCustomerEager
     /// 
     /// Change Tracking:
     /// When EF Core queries a DB, it stores the snapshot of the result set in memory
@@ -46,12 +46,32 @@ internal class CustomerRepository : ICustomerRepository
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public async Task<Customer> GetCustomer(int id)
+    public async Task<Customer> GetCustomerEager(int id)
     {
         return await _dbContext.Customers
             .Include(c => c.Orders) // Eager Loading
             .AsNoTracking() // To Disable change tracking.
             .SingleAsync(x => x.Id == id);
+    }
+
+    public async Task<Customer> GetCustomerLazy(int id)
+    {
+        return await _dbContext.Customers
+            .Include(c => c.Orders)
+            .AsSplitQuery()
+            .SingleAsync(x => x.Id == id);
+    }
+
+    public async Task<Customer> GetCustomerFromSqlInterpolated(int id)
+    {
+        return await _dbContext.Customers
+            .FromSqlInterpolated(@$"
+                SELECT TOP(2) [c].[Id], [c].[Address], [c].[Email], [c].[FirstName], [c].[LastName], [c].[Phone]
+                FROM [Customers] AS [c]
+                WHERE [c].[Id] = {id}
+               "
+            )
+            .SingleAsync(); ;
     }
 
     public async Task<bool> RemoveCustomer(int id)
