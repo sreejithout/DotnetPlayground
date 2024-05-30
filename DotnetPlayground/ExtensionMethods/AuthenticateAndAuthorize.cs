@@ -12,6 +12,17 @@ public static class AuthenticateAndAuthorize
 {
     public static void RegisterAuthentication(this IServiceCollection services, ConfigurationManager config)
     {
+        var tokenValidationParameters = new TokenValidationParameters
+        {
+            ValidIssuer = config["jwtSettings:issuer"],
+            ValidAudience = config["jwtSettings:audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["jwtSettings:key"])),
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateIssuerSigningKey = true,
+            ValidateLifetime = true,
+        };
+
         services.AddAuthentication(x =>
         {
             x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -21,17 +32,10 @@ public static class AuthenticateAndAuthorize
         .AddJwtBearer(options =>
         {
             options.SaveToken = true;
-            options.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidIssuer = config["jwtSettings:issuer"],
-                ValidAudience = config["jwtSettings:audience"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["jwtSettings:key"])),
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateIssuerSigningKey = true,
-                ValidateLifetime = true,
-            };
+            options.TokenValidationParameters = tokenValidationParameters;
         });
+
+        services.AddSingleton(tokenValidationParameters);
 
         // Makes sure Identity can be used
         services.AddIdentityCore<IdentityUser>(options =>

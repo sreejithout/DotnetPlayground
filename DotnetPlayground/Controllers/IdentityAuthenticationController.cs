@@ -55,15 +55,15 @@ public class IdentityAuthenticationController : ControllerBase
                 Result = false,
                 Errors = errors
             });
-
         }
 
-        var token = _jwtGenerator.GenerateIdentityJwt(newUser);
+        var (jwtToken, refreshToken) = await _jwtGenerator.GenerateIdentityJwt(newUser);
 
         return Ok(new AuthResult()
         {
             Result = true,
-            Token = token
+            Token = jwtToken,
+            RefreshToken = refreshToken
         });
     }
 
@@ -108,11 +108,53 @@ public class IdentityAuthenticationController : ControllerBase
             });
         }
 
-        var jwtToken = _jwtGenerator.GenerateIdentityJwt(existingUser);
+        var (jwtToken, refreshToken) = await _jwtGenerator.GenerateIdentityJwt(existingUser);
 
         return Ok(new AuthResult()
         {
             Token = jwtToken,
+            RefreshToken = refreshToken,
+            Result = true
+        });
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> RefreshToken([FromBody] TokenRequest requestDto)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(new AuthResult()
+            {
+                Errors = new List<string>()
+                {
+                    "Invalid Payload"
+                },
+                Result = false
+            });
+        }
+
+        var (isValid, storedToken) = await _jwtGenerator.VerifyAndGenerateToken(requestDto);
+
+        if (!isValid)
+        {
+            return BadRequest(new AuthResult()
+            {
+                Errors = new List<string>()
+                {
+                    "Invalid Token"
+                },
+                Result = false
+            });
+        }
+
+        var existingUser = await _userManager.FindByIdAsync(storedToken.Token);
+
+        var (jwtToken, refreshToken) = await _jwtGenerator.GenerateIdentityJwt(existingUser);
+
+        return Ok(new AuthResult()
+        {
+            Token = jwtToken,
+            RefreshToken = refreshToken,
             Result = true
         });
     }

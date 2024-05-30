@@ -40,8 +40,9 @@ public class AuthorizeController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost]
-    public ActionResult<string> SampleAuthenticationEndpoint(TokenGenerationRequest request)
+    public async Task<ActionResult<string>> SampleAuthenticationEndpoint(TokenGenerationRequest request)
     {
-        return _jwtGenerator.GenerateJwt(request);
+        var (jwtToken, _) = await _jwtGenerator.GenerateJwt(request);
+        return jwtToken;
     }
 }
