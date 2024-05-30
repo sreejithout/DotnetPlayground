@@ -21,7 +21,7 @@ public static class InlineMiddlewares
         // 02_02. MapWhen
         app.MapWhen(context => context.Request.Query.ContainsKey("q"), HandleRequestWithQuery);
 
-       
+
         // 03. Run is a Terminal Delegate. It only recieves the context. It terminates/ends the pipeline
         //
         ///// app.Run(async context => await context.Response.WriteAsync("Inline Run "));
@@ -31,7 +31,8 @@ public static class InlineMiddlewares
 
     private static void HandleRequestWithQuery(IApplicationBuilder app)
     {
-        app.Use(async (context, next) => {
+        app.Use(async (context, next) =>
+        {
             Console.WriteLine("Contains Query");
             await next(); // this line will not be required for MapWhen
         });
@@ -39,7 +40,8 @@ public static class InlineMiddlewares
 
     private static void MapHandler(IApplicationBuilder app)
     {
-        app.Run(async context => {
+        app.Run(async context =>
+        {
             Console.WriteLine("Reached Map Sample");
             await context.Response.WriteAsync("Reached Map Sample");
         });

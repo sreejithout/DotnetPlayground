@@ -20,7 +20,7 @@ public class PokemonApiController : ControllerBase
     }
 
     /// <summary>
-    /// Get Directly From IConfiguration
+    /// Get values Directly From IConfiguration
     /// </summary>
     /// <returns></returns>
     [HttpGet]

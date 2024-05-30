@@ -1,8 +1,8 @@
 ﻿using EntityFrameworkCorePlayground.Models;
 
-namespace Repositories.Interfaces;
+namespace Services.Interfaces;
 
-public interface ICustomerRepository
+public interface ICustomerService
 {
     /// <summary>
     /// Get All Customers
@@ -11,24 +11,19 @@ public interface ICustomerRepository
     IEnumerable<Customer> GetAllCustomers();
 
     /// <summary>
-    /// Get a Customer's Details using EF Core Eager Loading
+    /// Get a Customer's Details
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
     Task<Customer> GetCustomerEager(int id);
 
     /// <summary>
-    /// Get a Customer's Details using EF Core Lazy Loading
+    /// Get a Customer's Details by Lazy loading
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
     Task<Customer> GetCustomerLazy(int id);
 
-    /// <summary>
-    /// Get a Customer's Details using EF Core From Sql Interpolated
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
     Task<Customer> GetCustomerFromSqlInterpolated(int id);
 
     /// <summary>
