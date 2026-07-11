@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.Extensions.Options;
 using SharedPocos.Options;
 
@@ -17,6 +18,8 @@ public class WeatherApiController : ControllerBase
         _httpClientFactory = httpClientFactory;
     }
 
+    // Apply rate limiting to this Endpoint
+    [EnableRateLimiting("fixed")]
     [HttpGet("GetCurrentWeatherDetails/{city}")]
     public async Task<string> GetCurrentWeatherDetails([FromRoute] string city)
     {
