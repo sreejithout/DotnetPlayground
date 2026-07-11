@@ -1,6 +1,5 @@
 # Dotnet Playground
 ## .NET 10 api solution to learn the fundamentals step by step
-
 01. [Based on .NET 10](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-10)
 02. Layering (Trying a Clean Architecture here)
     - Business Logic Layer **DotnetPlayground.BLL**
@@ -50,4 +49,22 @@
 - Package Registry
   - [https://docs.microsoft.com/en-us/nuget/hosting-packages/overview](https://docs.microsoft.com/en-us/nuget/hosting-packages/overview)
 
- CI/CD
+ ## CI/CD
+ - [CI/CD Pipeline with Azure DevOps](https://learn.microsoft.com/en-us/azure/devops/pipelines/?view=azure-devops)
+  - [Azure DevOps Pipeline for .NET 10](https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops)
+  - [Azure DevOps Pipeline for .NET 10 with Docker](https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops#docker)
+  - [Azure DevOps Pipeline for .NET 10 with Docker and Kubernetes](https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops#docker-and-kubernetes)
+  - [Azure DevOps Pipeline for .NET 10 with Docker, Kubernetes and Helm](https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops#docker-kubernetes-and-helm)
+  - [Azure DevOps Pipeline for .NET 10 with Docker, Kubernetes, Helm and ArgoCD](https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops#docker-kubernetes-helm-and-argocd)
+  - [Azure DevOps Pipeline for .NET 10 with Docker, Kubernetes, Helm, ArgoCD and FluxCD](https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops#docker-kubernetes-helm-argocd-and-fluxcd)
+  - [Azure DevOps Pipeline for .NET 10 with Docker, Kubernetes, Helm, ArgoCD, FluxCD and GitHub Actions](https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops#docker-kubernetes-helm-argocd-fluxcd-and-github-actions)
+  - [Azure DevOps Pipeline for .NET 10 with Docker, Kubernetes, Helm, ArgoCD, FluxCD, GitHub Actions and Jenkins](https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops#docker-kubernetes-helm-argocd-fluxcd-github-actions-and-jenkins)
+  - [Azure DevOps Pipeline for .NET 10 with Docker, Kubernetes, Helm, ArgoCD, FluxCD, GitHub Actions, Jenkins and Terraform](https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops#docker-kubernetes-helm-argocd-fluxcd-github-actions-jenkins-and-terraform)
+  - [Azure DevOps Pipeline for .NET 10 with Docker, Kubernetes, Helm, ArgoCD, FluxCD, GitHub Actions, Jenkins, Terraform and Ansible](https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops#docker-kubernetes-helm-argocd-fluxcd-github-actions-jenkins-terraform-and-ansible)
+  - [Azure DevOps Pipeline for .NET 10 with Docker, Kubernetes, Helm, ArgoCD, FluxCD, GitHub Actions, Jenkins, Terraform, Ansible and Spinnaker](https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops#docker-kubernetes-helm-argocd-fluxcd-github-actions-jenkins-terraform-ansible-and-spinnaker)
+  - [Azure DevOps Pipeline for .NET 10 with Docker, Kubernetes, Helm, ArgoCD, FluxCD, GitHub Actions, Jenkins, Terraform, Ansible, Spinnaker and Argo Workflows](https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops#docker-kubernetes-helm-argocd-fluxcd-github-actions-jenkins-terraform-ansible-spinnaker-and-argo-workflows)
+  - [Azure DevOps Pipeline for .NET 10 with Docker, Kubernetes, Helm, ArgoCD, FluxCD, GitHub Actions, Jenkins, Terraform, Ansible, Spinnaker, Argo Workflows and Tekton](https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops#docker-kubernetes-helm-argocd-fluxcd-github-actions-jenkins-terraform-ansible-spinnaker-argo-workflows-and-tekton)
+  - [Azure DevOps Pipeline for .NET 10 with Docker, Kubernetes, Helm, ArgoCD, FluxCD, GitHub Actions, Jenkins, Terraform, Ansible, Spinnaker, Argo Workflows, Tekton and GitLab CI/CD](https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops#docker-kubernetes-helm-argocd-fluxcd-github-actions-jenkins-terraform-ansible-spinnaker-argo-workflows-tekton-and-gitlab-ci-cd)
+  - [Azure DevOps Pipeline for .NET 10 with Docker, Kubernetes, Helm, ArgoCD, FluxCD, GitHub Actions, Jenkins, Terraform, Ansible, Spinnaker, Argo Workflows, Tekton, GitLab CI/CD and CircleCI](https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops#docker-kubernetes-helm-argocd-fluxcd-github-actions-jenkins-terraform-ansible-spinnaker-argo-workflows-tekton-gitlab-ci-cd-and-circleci)
+  - [Azure DevOps Pipeline for .NET 10 with Docker, Kubernetes, Helm, ArgoCD, FluxCD, GitHub Actions, Jenkins, Terraform, Ansible, Spinnaker, Argo Workflows, Tekton, GitLab CI/CD, CircleCI and Bamboo](https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops#docker-kubernetes-helm-argocd-fluxcd-github-actions-jenkins-terraform-ansible-spinnaker-argo-workflows-tekton-gitlab-ci-cd-circleci-and-bamboo)
+  - [Azure DevOps Pipeline for .NET 10 with Docker, Kubernetes, Helm, ArgoCD, FluxCD, GitHub Actions, Jenkins, Terraform, Ansible, Spinnaker, Argo Workflows, Tekton, GitLab CI/CD, CircleCI, Bamboo and TeamCity](https://learn.microsoft.com/en-us/azure/devops/pipelines/ecosystems/dotnet-core?view=azure-devops#docker-kubernetes-helm-argocd-fluxcd-github-actions-jenkins-terraform-ansible-spinnaker-argo-workflows-tekton-gitlab-ci-cd-circleci-bamboo-and-teamcity)
