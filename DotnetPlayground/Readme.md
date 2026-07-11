@@ -21,12 +21,13 @@
     - [IHttpClientFactory](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-10.0)
 08. [CORS](https://learn.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-10.0)
 09. [EF Core](https://docs.microsoft.com/en-us/ef/core/)
+10. [Enforcing HTTPs](https://docs.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-10.0)      
+  - [Security Headers (HSTS)](https://learn.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-10.0#hsts)
+11. [Rate Limiting](https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit?view=aspnetcore-10.0)
+12. 
 
 ## Things todo in pipeline
-- [Security Headers (HSTS)](https://learn.microsoft.com/en-us/aspnet/core/security/http-headers?view=aspnetcore-10.0)
-- [Enforcing HTTPs](https://docs.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-10.0)
 - [API Versioning](https://learn.microsoft.com/en-us/aspnet/core/web-api/advanced/api-versioning?view=aspnetcore-10.0)
-- [Rate Limiting](https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit?view=aspnetcore-10.0)
 - [Cancellation Token](https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads?view=net-8.0)
 - [Health Checks](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-10.0)
 - [OpenTelemetry, Distributed Tracking](https://learn.microsoft.com/en-us/dotnet/core/diagnostics/distributed-tracing?view=dotnet-10)

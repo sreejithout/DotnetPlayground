@@ -47,6 +47,8 @@ builder.Services.RegisterConfigurations(config);
 
 // Register all custom routing constraints
 builder.Services.RegisterRoutingConstraints();
+
+builder.Services.RateLimiters();
 #endregion
 
 var app = builder.Build();
@@ -64,6 +66,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+else
+{
+    app.UseHsts();
+}
 
 app.UseHttpsRedirection();
 
@@ -78,6 +84,9 @@ app.UseRouting();
 app.UseCors();
 
 app.UseAuthorization();
+
+// Register Rate Limiters
+app.UseRateLimiter();
 
 // Register Route Endpoints by a simple middleware
 app.RegisterEndpoints();
