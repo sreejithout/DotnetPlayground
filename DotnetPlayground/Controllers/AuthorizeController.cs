@@ -1,4 +1,5 @@
-﻿using DotnetPlayground.WebApi.Utilities.Interfaces;
+﻿using Asp.Versioning;
+using DotnetPlayground.WebApi.Utilities.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SharedPocos.Models;
@@ -7,7 +8,8 @@ using SharedPocos.Models.Identity;
 namespace DotnetPlayground.WebApi.Controllers;
 
 [Authorize]
-[Route("api/v1/[controller]/[action]")]
+[ApiVersion("1.0")]
+[Route("api/v{version:apiVersion}/[controller]/[action]")]
 [ApiController]
 public class AuthorizeController : ControllerBase
 {

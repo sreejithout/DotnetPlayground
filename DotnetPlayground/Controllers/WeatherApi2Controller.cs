@@ -6,15 +6,15 @@ using SharedPocos.Options;
 
 namespace DotnetPlayground.WebApi.Controllers;
 
-[ApiVersion("1.0", Deprecated = true)]
+[ApiVersion("2.0")]
 [Route("api/v{version:apiVersion}/[controller]/[action]")]
 [ApiController]
-public class WeatherApiController : ControllerBase
+public class WeatherApi2Controller : ControllerBase
 {
     private readonly WeatherApiOptions _weatherApiOptions;
     private readonly IHttpClientFactory _httpClientFactory;
 
-    public WeatherApiController(IOptions<WeatherApiOptions> weatherApiOptions, IHttpClientFactory httpClientFactory)
+    public WeatherApi2Controller(IOptions<WeatherApiOptions> weatherApiOptions, IHttpClientFactory httpClientFactory)
     {
         _weatherApiOptions = weatherApiOptions.Value;
         _httpClientFactory = httpClientFactory;

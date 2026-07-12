@@ -1,9 +1,11 @@
-﻿using DotnetPlayground.WebApi.Filters;
+﻿using Asp.Versioning;
+using DotnetPlayground.WebApi.Filters;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotnetPlayground.WebApi.Controllers;
 
-[Route("api/v1/[controller]/[action]")]
+[ApiVersion("1.0")]
+[Route("api/v{version:apiVersion}/[controller]/[action]")]
 [ApiController]
 [SampleActionFilter("FilterController")]
 public class FilterController : ControllerBase

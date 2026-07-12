@@ -1,10 +1,12 @@
-﻿using EntityFrameworkCorePlayground.Models;
+﻿using Asp.Versioning;
+using EntityFrameworkCorePlayground.Models;
 using Microsoft.AspNetCore.Mvc;
 using Services.Interfaces;
 
 namespace DotnetPlayground.WebApi.Controllers;
 
-[Route("api/v1/[controller]/[action]")]
+[ApiVersion("1.0")]
+[Route("api/v{version:apiVersion}/[controller]/[action]")]
 [ApiController]
 public class CustomerController : ControllerBase
 {

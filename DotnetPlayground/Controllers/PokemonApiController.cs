@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using SharedPocos.Options;
 
 namespace DotnetPlayground.WebApi.Controllers;
 
-[Route("api/v1/[controller]/[action]")]
+[ApiVersion("1.0")]
+[Route("api/v{version:apiVersion}/[controller]/[action]")]
 [ApiController]
 public class PokemonApiController : ControllerBase
 {
