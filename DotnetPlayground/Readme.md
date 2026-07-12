@@ -25,9 +25,9 @@
   - [Security Headers (HSTS)](https://learn.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-10.0#hsts)
 11. [Rate Limiting](https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit?view=aspnetcore-10.0)
 12. [API Versioning](https://learn.microsoft.com/en-us/aspnet/core/web-api/advanced/api-versioning?view=aspnetcore-10.0)
+13. [Open API Documentation with Scalar instead of Swagger](https://learn.microsoft.com/en-us/aspnet/core/web-api/advanced/openapi?view=aspnetcore-10.0)
 
 ## Things todo in pipeline
-- [Open API Documentation with Scalar instead of Swagger](https://learn.microsoft.com/en-us/aspnet/core/web-api/advanced/openapi?view=aspnetcore-10.0)
 - [Cancellation Token](https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads?view=net-8.0)
 - [Health Checks](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-10.0)
 - [OpenTelemetry, Distributed Tracking](https://learn.microsoft.com/en-us/dotnet/core/diagnostics/distributed-tracing?view=dotnet-10)

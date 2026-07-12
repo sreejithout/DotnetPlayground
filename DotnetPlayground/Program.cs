@@ -2,6 +2,7 @@ using Asp.Versioning;
 using DotnetPlayground.WebApi.ExtensionMethods;
 using EntityFrameworkCorePlayground.Data;
 using Microsoft.EntityFrameworkCore;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -35,9 +36,8 @@ builder.Services.AddApiVersioning(options => {
     options.SubstituteApiVersionInUrl = true; // replace {version} in route templates
 });
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddOpenApi();
 
 // Reading Configurations From Environment variables
 config.AddEnvironmentVariables(); // To Enable Reading From Environment variables
@@ -68,9 +68,6 @@ builder.Services.RateLimiters();
 
 var app = builder.Build();
 
-// Map OpenAPI endpoints with Document-Per-Version isolation
-app.MapOpenApi(); // Auto-splits v1, v2 docs cleanly
-
 app.RegisterInlineMiddlewares();
 // Register all middlewares inside an extension method
 app.RegisterMiddlewares();
@@ -81,8 +78,13 @@ app.RegisterSimpleConfigs(builder);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.MapOpenApi();
+
+    app.MapScalarApiReference(options =>
+    {
+        // Optional: Configure default settings, like authentication schemes
+        options.WithPreferredScheme("Bearer");
+    });
 }
 else
 {
