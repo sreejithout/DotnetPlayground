@@ -1,10 +1,12 @@
-﻿using DotnetPlayground.WebApi.Exceptions;
+﻿using Asp.Versioning;
+using DotnetPlayground.WebApi.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotnetPlayground.WebApi.Controllers;
 
 [ApiController]
-[Route("api/v1/[controller]/[action]")]
+[ApiVersion("1.0")]
+[Route("api/v{version:apiVersion}/[controller]/[action]")]
 public class ErrorHandlingController : ControllerBase
 {
     private readonly ILogger<ErrorHandlingController> _logger;

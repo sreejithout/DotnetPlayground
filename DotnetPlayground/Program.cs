@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using DotnetPlayground.WebApi.ExtensionMethods;
 using EntityFrameworkCorePlayground.Data;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,20 @@ builder.Services.AddCors(options => options.RegisterCorsOptions(config));
 // Add services to the container.
 builder.Services.AddControllers(options => options.RegisterControllerOptions())
 .AddXmlSerializerFormatters(); // To enable Consuming of Xml in endpoints
+
+builder.Services.AddApiVersioning(options => {
+    options.AssumeDefaultVersionWhenUnspecified = true; 
+    options.DefaultApiVersion = new ApiVersion(1, 0); 
+    options.ReportApiVersions = true; // Broadcasts supported/deprecated versions via 'api-supported-versions' headers
+    options.ApiVersionReader = ApiVersionReader.Combine(
+        new UrlSegmentApiVersionReader(),  // url segment: v{version}
+        new HeaderApiVersionReader("x-api-version"),              // header: x-api-version
+        new QueryStringApiVersionReader("api-version") // query: ?api-version=1.0
+    );
+}).AddApiExplorer(options => {
+    options.GroupNameFormat = "'v'V"; // Formats the version group name (e.g., 'v1', 'v2')
+    options.SubstituteApiVersionInUrl = true; // replace {version} in route templates
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -52,6 +67,9 @@ builder.Services.RateLimiters();
 #endregion
 
 var app = builder.Build();
+
+// Map OpenAPI endpoints with Document-Per-Version isolation
+app.MapOpenApi(); // Auto-splits v1, v2 docs cleanly
 
 app.RegisterInlineMiddlewares();
 // Register all middlewares inside an extension method

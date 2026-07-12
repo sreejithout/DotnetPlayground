@@ -1,4 +1,5 @@
-﻿using DotnetPlayground.WebApi.Utilities.Interfaces;
+﻿using Asp.Versioning;
+using DotnetPlayground.WebApi.Utilities.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SharedPocos.DTOs;
@@ -6,7 +7,8 @@ using SharedPocos.Models;
 
 namespace DotnetPlayground.WebApi.Controllers;
 
-[Route("api/v1/[controller]/[action]")]
+[ApiVersion("1.0")]
+[Route("api/v{version:apiVersion}/[controller]/[action]")]
 [ApiController]
 public class IdentityAuthenticationController : ControllerBase
 {

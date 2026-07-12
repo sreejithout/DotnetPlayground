@@ -1,10 +1,12 @@
-﻿using DotnetPlayground.WebApi.ExampleModels;
+﻿using Asp.Versioning;
+using DotnetPlayground.WebApi.ExampleModels;
 using Microsoft.AspNetCore.Mvc;
 using SharedPocos.Models;
 
 namespace DotnetPlayground.WebApi.Controllers;
 
-[Route("api/v1/[controller]/[action]")]
+[ApiVersion("1.0")]
+[Route("api/v{version:apiVersion}/[controller]/[action]")]
 [ApiController]
 [BindProperties(SupportsGet = true)]
 [Consumes("application/xml", "application/json")]

@@ -24,15 +24,14 @@
 10. [Enforcing HTTPs](https://docs.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-10.0)      
   - [Security Headers (HSTS)](https://learn.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-10.0#hsts)
 11. [Rate Limiting](https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit?view=aspnetcore-10.0)
-12. 
+12. [API Versioning](https://learn.microsoft.com/en-us/aspnet/core/web-api/advanced/api-versioning?view=aspnetcore-10.0)
 
 ## Things todo in pipeline
-- [API Versioning](https://learn.microsoft.com/en-us/aspnet/core/web-api/advanced/api-versioning?view=aspnetcore-10.0)
+- [Open API Documentation with Scalar instead of Swagger](https://learn.microsoft.com/en-us/aspnet/core/web-api/advanced/openapi?view=aspnetcore-10.0)
 - [Cancellation Token](https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads?view=net-8.0)
 - [Health Checks](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-10.0)
 - [OpenTelemetry, Distributed Tracking](https://learn.microsoft.com/en-us/dotnet/core/diagnostics/distributed-tracing?view=dotnet-10)
 - [Structured Logging with Serilog](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-10.0#structured-logging)
-- [Open API Documentation with Scalar instead of Swagger](https://learn.microsoft.com/en-us/aspnet/core/web-api/advanced/openapi?view=aspnetcore-10.0)
 - [Caching](https://docs.microsoft.com/en-us/aspnet/core/performance/caching/?view=aspnetcore-10.0)
 - [Idempotency](https://docs.microsoft.com/en-us/aspnet/core/web-api/idempotency?view=aspnetcore-10.0)
 - [Standardized API Response](https://learn.microsoft.com/en-us/aspnet/core/web-api/advanced/standardized-api-response?view=aspnetcore-10.0)
