@@ -2,6 +2,7 @@
 using DotnetPlayground.WebApi.Utilities.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using SharedPocos.Models;
 using SharedPocos.Models.Identity;
 
@@ -24,6 +25,7 @@ public class AuthorizeController : ControllerBase
     [HttpGet]
     public ActionResult GetAnonymously()
     {
+        Log.Information("it's a simple endpoint without authorization");
         return Ok("it's a simple endpoint without authorization");
     }
 
