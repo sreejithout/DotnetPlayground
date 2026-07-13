@@ -29,38 +29,38 @@ public class ProductController : ControllerBase
 
     // GET: api/<ProductController>
     [HttpGet("GetProducts")]
-    public IEnumerable<Product> Get()
+    public async Task<List<Product>> Get(CancellationToken token)
     {
         Console.WriteLine($"DI configure value 'C# Version' inside ProductController: {_appOptions.CSharpFeatures.Version}");
         Console.WriteLine($"DI configure value 'Angular Version' inside ProductController: {_angularFeatureOptions.Version}");
-        return _productService.GetAllProducts();
+        return await _productService.GetAllProducts(token);
     }
 
     // GET api/<ProductController>/5
     [HttpGet("/[action]/{id}")]
-    public async Task<Product> GetProductDetails(int id)
+    public async Task<Product> GetProductDetails(int id, CancellationToken token)
     {
-        return await _productService.GetProduct(id);
+        return await _productService.GetProduct(id, token);
     }
 
     // POST api/<ProductController>
     [HttpPost("/AddProduct")] // Leading slash("/") will make sure to discard the parent route
-    public async Task Post([FromBody] Product prod)
+    public async Task Post([FromBody] Product prod, CancellationToken token)
     {
-        await _productService.AddProduct(prod);
+        await _productService.AddProduct(prod, token);
     }
 
     // PUT api/<ProductController>/5
     [HttpPut("[action]")]
-    public async Task UpdateProduct([FromBody] Product prod)
+    public async Task UpdateProduct([FromBody] Product prod, CancellationToken token)
     {
-        await _productService.UpdateProduct(prod);
+        await _productService.UpdateProduct(prod, token);
     }
 
     // DELETE api/<ProductController>/5
     [HttpDelete("DeleteProduct/{id}")]
-    public async Task Delete(int id)
+    public async Task Delete(int id, CancellationToken token)
     {
-        await _productService.RemoveProduct(id);
+        await _productService.RemoveProduct(id, token);
     }
 }
