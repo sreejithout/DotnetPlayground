@@ -27,10 +27,10 @@
 12. [API Versioning](https://learn.microsoft.com/en-us/aspnet/core/web-api/advanced/api-versioning?view=aspnetcore-10.0)
 13. [Open API Documentation with Scalar instead of Swagger](https://learn.microsoft.com/en-us/aspnet/core/web-api/advanced/openapi?view=aspnetcore-10.0)
 14. [Structured Logging with Serilog](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-10.0#structured-logging)
+15. [Health Checks](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-10.0)
 
 ## Things todo in pipeline
 - [Cancellation Token](https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads?view=net-8.0)
-- [Health Checks](https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-10.0)
 - [OpenTelemetry, Distributed Tracking](https://learn.microsoft.com/en-us/dotnet/core/diagnostics/distributed-tracing?view=dotnet-10)
 - [Caching](https://docs.microsoft.com/en-us/aspnet/core/performance/caching/?view=aspnetcore-10.0)
 - [Idempotency](https://docs.microsoft.com/en-us/aspnet/core/web-api/idempotency?view=aspnetcore-10.0)

@@ -1,6 +1,7 @@
 using Asp.Versioning;
 using DotnetPlayground.WebApi.ExtensionMethods;
 using EntityFrameworkCorePlayground.Data;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using Serilog;
@@ -83,6 +84,8 @@ builder.Services.RegisterConfigurations(config);
 builder.Services.RegisterRoutingConstraints();
 
 builder.Services.RateLimiters();
+
+builder.Services.AddHealthChecks();
 #endregion
 
 var app = builder.Build();
@@ -132,5 +135,17 @@ app.UseRateLimiter();
 
 // Register Route Endpoints by a simple middleware
 app.RegisterEndpoints();
+
+// Liveness Endpoint: Only checks if the API process is running (Predicate = false means no tagged checks run)
+app.MapHealthChecks("/health/live", new HealthCheckOptions
+{
+    Predicate = _ => false
+});
+
+// Readiness Endpoint: Runs checks tagged with "ready" (e.g., the database)
+app.MapHealthChecks("/health/ready", new HealthCheckOptions
+{
+    Predicate = check => check.Tags.Contains("ready")
+});
 
 app.Run();
