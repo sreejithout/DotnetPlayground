@@ -18,37 +18,37 @@ internal class ProductRepository : IProductRepository
         _dbContext = dbContext;
     }
 
-    public async Task<bool> AddProduct(Product product)
+    public async Task<bool> AddProduct(Product product, CancellationToken token)
     {
         await _dbContext.AddAsync(new Product { Name = product.Name, Price = product.Price });
-        await _dbContext.SaveChangesAsync();
+        await _dbContext.SaveChangesAsync(token);
         return true;
     }
 
-    public IEnumerable<Product> GetAllProducts()
+    public async Task<List<Product>> GetAllProducts(CancellationToken token)
     {
-        return _dbContext.Products;
+        return await _dbContext.Products.ToListAsync(token);
     }
 
-    public async Task<Product> GetProduct(int id)
+    public async Task<Product> GetProduct(int id, CancellationToken token)
     {
-        return await _dbContext.Products.SingleAsync(x => x.Id == id);
+        return await _dbContext.Products.SingleAsync(x => x.Id == id, token);
     }
 
-    public async Task<bool> RemoveProduct(int id)
+    public async Task<bool> RemoveProduct(int id, CancellationToken token)
     {
-        var newProd = _dbContext.Products.Single(p => p.Id == id);
-        _dbContext.Remove(newProd);
-        await _dbContext.SaveChangesAsync();
+        var product = await this.GetProduct(id, token);
+        _dbContext.Remove(product);
+        await _dbContext.SaveChangesAsync(token);
         return true;
     }
 
-    public async Task<Product> UpdateProduct(Product product)
+    public async Task<Product> UpdateProduct(Product product, CancellationToken token)
     {
         var newProd = _dbContext.Products.Single(p => p.Id == product.Id);
         newProd.Name = product.Name;
         newProd.Price = product.Price;
-        await _dbContext.SaveChangesAsync();
+        await _dbContext.SaveChangesAsync(token);
         return newProd;
     }
 }

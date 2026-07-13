@@ -13,28 +13,28 @@ public class ProductService : IProductService
         _productRepository = productRepository;
     }
 
-    public async Task<bool> AddProduct(Product product)
+    public async Task<bool> AddProduct(Product product, CancellationToken token)
     {
-        return await _productRepository.AddProduct(product);
+        return await _productRepository.AddProduct(product, token);
     }
 
-    public IEnumerable<Product> GetAllProducts()
+    public async Task<List<Product>> GetAllProducts(CancellationToken token)
     {
-        return _productRepository.GetAllProducts();
+        return await _productRepository.GetAllProducts(token);
     }
 
-    public async Task<Product> GetProduct(int id)
+    public async Task<Product> GetProduct(int id, CancellationToken token)
     {
-        return await _productRepository.GetProduct(id);
+        return await _productRepository.GetProduct(id, token);
     }
 
-    public async Task<bool> RemoveProduct(int id)
+    public async Task<bool> RemoveProduct(int id, CancellationToken token)
     {
-        return await _productRepository.RemoveProduct(id);
+        return await _productRepository.RemoveProduct(id, token);
     }
 
-    public async Task<Product> UpdateProduct(Product product)
+    public async Task<Product> UpdateProduct(Product product, CancellationToken token)
     {
-        return await _productRepository.UpdateProduct(product);
+        return await _productRepository.UpdateProduct(product, token);
     }
 }
