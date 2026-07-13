@@ -3,9 +3,31 @@ using DotnetPlayground.WebApi.ExtensionMethods;
 using EntityFrameworkCorePlayground.Data;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
+using Serilog;
+
+var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{environment}.json", optional: true)
+    .AddEnvironmentVariables()
+    .Build();
+
+// Initialize Serilog configuration
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(configuration) // Now it knows about Seq/Datadog immediately
+    .CreateBootstrapLogger();
 
 var builder = WebApplication.CreateBuilder(args);
+
+Log.Information("Starting web application in {Environment}...", environment);
 var config = builder.Configuration;
+
+// Configure the full Serilog pipeline
+builder.Services.AddSerilog((services, loggerConfiguration) => loggerConfiguration
+    .ReadFrom.Configuration(config)
+    .ReadFrom.Services(services)
+    .Enrich.FromLogContext());
+
 
 // Register Authentication in an Extension method
 builder.Services.RegisterAuthentication(config);
@@ -39,9 +61,6 @@ builder.Services.AddApiVersioning(options => {
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
 
-// Reading Configurations From Environment variables
-config.AddEnvironmentVariables(); // To Enable Reading From Environment variables
-
 #region Service Registrations
 // We need to Add Http Client as additional service for using HttpClientFactory.
 builder.Services.RegisterHttpClients(config);
@@ -67,6 +86,9 @@ builder.Services.RateLimiters();
 #endregion
 
 var app = builder.Build();
+
+// Add Serilog request logging (adds clean, single-line HTTP request logs)
+app.UseSerilogRequestLogging();
 
 app.RegisterInlineMiddlewares();
 // Register all middlewares inside an extension method
