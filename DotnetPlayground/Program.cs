@@ -3,6 +3,7 @@ using DotnetPlayground.WebApi.ExtensionMethods;
 using EntityFrameworkCorePlayground.Data;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Hybrid;
 using Scalar.AspNetCore;
 using Serilog;
 
@@ -29,6 +30,30 @@ builder.Services.AddSerilog((services, loggerConfiguration) => loggerConfigurati
     .ReadFrom.Services(services)
     .Enrich.FromLogContext());
 
+// Register Redis as the underlying IDistributedCache
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+
+    // Optional: Prefix all keys in Redis so multiple apps can share the same Redis instance safely
+    options.InstanceName = "MyDotNetApp_";
+});
+
+// Register HybridCache
+builder.Services.AddHybridCache(options =>
+{
+    // You can set global defaults here
+    options.MaximumPayloadBytes = 1024 * 1024; // 1MB limit
+    options.MaximumKeyLength = 512;
+    options.DefaultEntryOptions = new HybridCacheEntryOptions
+    {
+        // L2 (Redis) Expiration: How long the data lives in the shared distributed cache
+        Expiration = TimeSpan.FromMinutes(5),
+
+        // L1 (In-Memory) Expiration: Usually much shorter to ensure nodes don't drift too far out of sync
+        LocalCacheExpiration = TimeSpan.FromMinutes(1)
+    };
+});
 
 // Register Authentication in an Extension method
 builder.Services.RegisterAuthentication(config);
