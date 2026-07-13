@@ -1,6 +1,7 @@
 ﻿using EntityFrameworkCorePlayground.Data;
 using EntityFrameworkCorePlayground.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Hybrid;
 using Repositories.Interfaces;
 
 namespace Repositories;
@@ -8,6 +9,7 @@ namespace Repositories;
 internal class ProductRepository : IProductRepository
 {
     private readonly DummyDbContext _dbContext;
+    private readonly HybridCache _hybridCache;
 
     /// <summary>
     /// Constructor
@@ -16,6 +18,7 @@ internal class ProductRepository : IProductRepository
     public ProductRepository(DummyDbContext dbContext)
     {
         _dbContext = dbContext;
+        _hybridCache = _hybridCache;
     }
 
     public async Task<bool> AddProduct(Product product, CancellationToken token)
@@ -32,7 +35,21 @@ internal class ProductRepository : IProductRepository
 
     public async Task<Product> GetProduct(int id, CancellationToken token)
     {
-        return await _dbContext.Products.SingleAsync(x => x.Id == id, token);
+        string cacheKey = $"product:{id}";
+
+        // GetOrCreateAsync does all the heavy lifting
+        return await _hybridCache.GetOrCreateAsync(
+            cacheKey,
+            async cancelToken =>
+            {
+                // This factory only runs if the cache is completely empty for this key
+                // and it only runs ONCE even if 100 requests hit it at the same time.
+                return await _dbContext.Products.FindAsync([id], cancelToken);
+            },
+            options: null, // Use global defaults, or pass specific HybridCacheEntryOptions here
+            tags: ["all-products"], // Tags for easy invalidation
+            cancellationToken: token
+        );
     }
 
     public async Task<bool> RemoveProduct(int id, CancellationToken token)
@@ -40,6 +57,11 @@ internal class ProductRepository : IProductRepository
         var product = await this.GetProduct(id, token);
         _dbContext.Remove(product);
         await _dbContext.SaveChangesAsync(token);
+        // Evict the specific item from the cache
+        await _hybridCache.RemoveAsync($"product:{product.Id}", token);
+
+        // OR: If you updated multiple products, you can clear by tag
+        // await _hybridCache.RemoveByTagAsync("all-products", token);
         return true;
     }
 
@@ -49,6 +71,11 @@ internal class ProductRepository : IProductRepository
         newProd.Name = product.Name;
         newProd.Price = product.Price;
         await _dbContext.SaveChangesAsync(token);
+        // Evict the specific item from the cache
+        await _hybridCache.RemoveAsync($"product:{product.Id}", token);
+
+        // OR: If you updated multiple products, you can clear by tag
+        // await _hybridCache.RemoveByTagAsync("all-products", token);
         return newProd;
     }
 }
