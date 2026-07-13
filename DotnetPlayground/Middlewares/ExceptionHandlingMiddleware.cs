@@ -24,6 +24,12 @@ public class ExceptionHandlingMiddleware : IMiddleware
             await context.Response.WriteAsync(ex.Message);
             throw;
         }
+        catch (OperationCanceledException ex)
+        {
+            context.Response.StatusCode = 499;
+            await context.Response.WriteAsync(ex.Message);
+            throw;
+        }
         catch (Exception ex)
         {
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
