@@ -1,6 +1,7 @@
 ﻿using Asp.Versioning;
 using EntityFrameworkCorePlayground.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Options;
 using Services.Interfaces;
 using SharedPocos.Options;
@@ -15,16 +16,19 @@ public class ProductController : ControllerBase
     private readonly IProductService _productService;
     private readonly AppOptions _appOptions;
     private readonly AngularFeatureOptions _angularFeatureOptions;
+    private readonly IDistributedCache _cache;
 
     public ProductController(
         IProductService productService,
         IOptions<AppOptions> appOptions, // NOTE: We are using IOptions. This will get the changed configuration value after restarting the app only.
-        IOptionsSnapshot<AngularFeatureOptions> angularFeatureOptions // NOTE: We are using IOptionsSnapshot to get the changed configuration value without restarting the app
+        IOptionsSnapshot<AngularFeatureOptions> angularFeatureOptions, // NOTE: We are using IOptionsSnapshot to get the changed configuration value without restarting the app
+        IDistributedCache cache
         )
     {
         _productService = productService;
         _appOptions = appOptions.Value;
         _angularFeatureOptions = angularFeatureOptions.Value;
+        _cache = cache;
     }
 
     // GET: api/<ProductController>
@@ -45,9 +49,30 @@ public class ProductController : ControllerBase
 
     // POST api/<ProductController>
     [HttpPost("/AddProduct")] // Leading slash("/") will make sure to discard the parent route
-    public async Task Post([FromBody] Product prod, CancellationToken token)
+    public async Task<IActionResult> Post([FromHeader(Name = "Idempotency-Key")] string idempotencyKey, [FromBody] Product prod, CancellationToken token)
     {
+        if (string.IsNullOrWhiteSpace(idempotencyKey))
+        {
+            return BadRequest("The 'Idempotency-Key' header is required.");
+        }
+        // 1. Check the distributed cache asynchronously
+        var existingRequest = await _cache.GetStringAsync(idempotencyKey, token);
+        if (!string.IsNullOrEmpty(existingRequest))
+        {
+            return Ok(new { Message = "Product creation already processed (Idempotent response)." });
+        }
+
         await _productService.AddProduct(prod, token);
+        // 3. Configure cache expiration (e.g., 24 hours)
+        var cacheOptions = new DistributedCacheEntryOptions
+        {
+            AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24)
+        };
+
+        // 4. Save to the distributed cache
+        await _cache.SetStringAsync(idempotencyKey, "processed", cacheOptions, token);
+
+        return CreatedAtAction(nameof(GetProductDetails), new { id = prod.Id }, prod);
     }
 
     // PUT api/<ProductController>/5
