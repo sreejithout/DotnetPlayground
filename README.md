@@ -3,8 +3,7 @@
 - Starting point is https://github.com/sreejithout/DotnetPlayground/blob/master/DotnetPlayground/Program.cs
 
 # Current Status
-- Dotnet is in 6.0 and C# is 10.
+- Dotnet is in 10.0.
 
 # Future Plan
-- Add all the features till dotnet 6 and C# 10.
-- Then update the solution to dotnet 8 and update the code accordingly.
+- Add all the features till dotnet 10 and C# 14.
