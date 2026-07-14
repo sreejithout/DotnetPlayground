@@ -13,6 +13,7 @@ public static class DependencyInjections
         services.AddRepositories();
         services.AddServices();
 
+        services.AddScoped<IdempotencyFilter>();
         services.AddSingleton<SampleResultFilterAttribute>();
         services.AddTransient<ExceptionHandlingMiddleware>();
 

@@ -1,4 +1,5 @@
 ﻿using Asp.Versioning;
+using DotnetPlayground.WebApi.Filters;
 using EntityFrameworkCorePlayground.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
@@ -49,28 +50,10 @@ public class ProductController : ControllerBase
 
     // POST api/<ProductController>
     [HttpPost("/AddProduct")] // Leading slash("/") will make sure to discard the parent route
-    public async Task<IActionResult> Post([FromHeader(Name = "Idempotency-Key")] string idempotencyKey, [FromBody] Product prod, CancellationToken token)
+    [ServiceFilter(typeof(IdempotencyFilter))]
+    public async Task<IActionResult> Post([FromBody] Product prod, CancellationToken token)
     {
-        if (string.IsNullOrWhiteSpace(idempotencyKey))
-        {
-            return BadRequest("The 'Idempotency-Key' header is required.");
-        }
-        // 1. Check the distributed cache asynchronously
-        var existingRequest = await _cache.GetStringAsync(idempotencyKey, token);
-        if (!string.IsNullOrEmpty(existingRequest))
-        {
-            return Ok(new { Message = "Product creation already processed (Idempotent response)." });
-        }
-
         await _productService.AddProduct(prod, token);
-        // 3. Configure cache expiration (e.g., 24 hours)
-        var cacheOptions = new DistributedCacheEntryOptions
-        {
-            AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(24)
-        };
-
-        // 4. Save to the distributed cache
-        await _cache.SetStringAsync(idempotencyKey, "processed", cacheOptions, token);
 
         return CreatedAtAction(nameof(GetProductDetails), new { id = prod.Id }, prod);
     }
