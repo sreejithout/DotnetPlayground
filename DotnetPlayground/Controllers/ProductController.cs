@@ -2,7 +2,6 @@
 using DotnetPlayground.WebApi.Filters;
 using EntityFrameworkCorePlayground.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Options;
 using Services.Interfaces;
 using SharedPocos.Options;
@@ -17,19 +16,16 @@ public class ProductController : ControllerBase
     private readonly IProductService _productService;
     private readonly AppOptions _appOptions;
     private readonly AngularFeatureOptions _angularFeatureOptions;
-    private readonly IDistributedCache _cache;
 
     public ProductController(
         IProductService productService,
         IOptions<AppOptions> appOptions, // NOTE: We are using IOptions. This will get the changed configuration value after restarting the app only.
-        IOptionsSnapshot<AngularFeatureOptions> angularFeatureOptions, // NOTE: We are using IOptionsSnapshot to get the changed configuration value without restarting the app
-        IDistributedCache cache
+        IOptionsSnapshot<AngularFeatureOptions> angularFeatureOptions // NOTE: We are using IOptionsSnapshot to get the changed configuration value without restarting the app
         )
     {
         _productService = productService;
         _appOptions = appOptions.Value;
         _angularFeatureOptions = angularFeatureOptions.Value;
-        _cache = cache;
     }
 
     // GET: api/<ProductController>
