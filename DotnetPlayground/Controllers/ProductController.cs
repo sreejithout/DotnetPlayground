@@ -1,4 +1,5 @@
 ﻿using Asp.Versioning;
+using DotnetPlayground.WebApi.Filters;
 using EntityFrameworkCorePlayground.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -45,9 +46,12 @@ public class ProductController : ControllerBase
 
     // POST api/<ProductController>
     [HttpPost("/AddProduct")] // Leading slash("/") will make sure to discard the parent route
-    public async Task Post([FromBody] Product prod, CancellationToken token)
+    [ServiceFilter(typeof(IdempotencyFilter))]
+    public async Task<IActionResult> Post([FromBody] Product prod, CancellationToken token)
     {
         await _productService.AddProduct(prod, token);
+
+        return CreatedAtAction(nameof(GetProductDetails), new { id = prod.Id }, prod);
     }
 
     // PUT api/<ProductController>/5
