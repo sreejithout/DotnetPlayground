@@ -27,6 +27,20 @@ public static class InlineMiddlewares
         ///// app.Run(async context => await context.Response.WriteAsync("Inline Run "));
         //
         // Whatever we write after does not get executed.
+
+
+        // XSS prevention and clickjacking defense headers
+        app.Use(async (context, next) =>
+        {
+            // Prevents the browser from guessing the content type. 
+            // If you say it's JSON, the browser will strictly treat it as JSON.
+            context.Response.Headers.Append("X-Content-Type-Options", "nosniff");
+
+            // Prevents your API from being embedded in iframes (Clickjacking defense)
+            context.Response.Headers.Append("X-Frame-Options", "DENY");
+
+            await next();
+        });
     }
 
     private static void HandleRequestWithQuery(IApplicationBuilder app)
